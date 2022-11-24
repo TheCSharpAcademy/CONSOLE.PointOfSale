@@ -1,0 +1,15 @@
+/workspaces/CONSOLE.PointOfSale/KebPOS/bin/Debug/net7.0/KebPOS
+/workspaces/CONSOLE.PointOfSale/KebPOS/bin/Debug/net7.0/KebPOS.deps.json
+/workspaces/CONSOLE.PointOfSale/KebPOS/bin/Debug/net7.0/KebPOS.runtimeconfig.json
+/workspaces/CONSOLE.PointOfSale/KebPOS/bin/Debug/net7.0/KebPOS.dll
+/workspaces/CONSOLE.PointOfSale/KebPOS/bin/Debug/net7.0/KebPOS.pdb
+/workspaces/CONSOLE.PointOfSale/KebPOS/obj/Debug/net7.0/KebPOS.csproj.AssemblyReference.cache
+/workspaces/CONSOLE.PointOfSale/KebPOS/obj/Debug/net7.0/KebPOS.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/CONSOLE.PointOfSale/KebPOS/obj/Debug/net7.0/KebPOS.AssemblyInfoInputs.cache
+/workspaces/CONSOLE.PointOfSale/KebPOS/obj/Debug/net7.0/KebPOS.AssemblyInfo.cs
+/workspaces/CONSOLE.PointOfSale/KebPOS/obj/Debug/net7.0/KebPOS.csproj.CoreCompileInputs.cache
+/workspaces/CONSOLE.PointOfSale/KebPOS/obj/Debug/net7.0/KebPOS.dll
+/workspaces/CONSOLE.PointOfSale/KebPOS/obj/Debug/net7.0/refint/KebPOS.dll
+/workspaces/CONSOLE.PointOfSale/KebPOS/obj/Debug/net7.0/KebPOS.pdb
+/workspaces/CONSOLE.PointOfSale/KebPOS/obj/Debug/net7.0/KebPOS.genruntimeconfig.cache
+/workspaces/CONSOLE.PointOfSale/KebPOS/obj/Debug/net7.0/ref/KebPOS.dll

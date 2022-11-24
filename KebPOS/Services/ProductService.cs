@@ -10,13 +10,13 @@ namespace KebPOS.Services
     {
         public List<string> GetProducts()
         {
-            var order = new List<string>();
-            order.AddRange(new string[] {
+            var products = new List<string>();
+            products.AddRange(new string[] {
                 "Yogurt Kebab", "Shish Kebab", "Doner Kebab", "Kathi Kebab", "Chapli Kebab",
                 "Burrah Kebab", "Beyti Kebab", "Adana Kebab", "Chicken Sis Kebab", "Turkish Sis Kebab",
                 "Water", "Tea", "Milk", "Coffee", "Beer"
             });
-            return order;
+            return products;
         }
     }
 }

@@ -3,7 +3,6 @@ namespace KebPOS;
 
 public class MainMenu
 {
-
     internal void InitializeMenu()
     {
         bool closeMenu = false;
@@ -17,20 +16,20 @@ public class MainMenu
             Console.WriteLine("Type 3 to view order details");
             Console.WriteLine("\nType 0 to Close Application.");
 
-            int userInput = Convert.ToInt32(Console.ReadLine());
+            string userInput = Console.ReadLine();
 
             switch (userInput)
             {
-                case 0: 
+                case "0": 
                     closeMenu = true;
                     break;  
-                case 1:
+                case "1":
                     AddNewOrder();
                     break;
-                case 2:
+                case "2":
                     ViewOrders();
                     break;
-                case 3:
+                case "3":
                     ViewOrderDetails();
                     break;
                 default:

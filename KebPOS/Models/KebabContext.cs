@@ -1,7 +1,6 @@
-﻿using KebPOS.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace KebPOS.DataAccess;
+namespace KebPOS.Models;
 
 internal class KebabContext : DbContext
 {

@@ -14,7 +14,8 @@ namespace KebPOS.Services
                     Name = "Yogurt Kebab", 
                     Description = """
                         The other name of this yummy Kebab is “good for you Kebab” the Kebab is made up of paneer, raisins, oats and creamy yogurt. 
-                        This Kebab is a total combination of health and taste. The addition of extraordinary paneer simply enhances the taste of the Kebab. You can add other veggies also.
+                        This Kebab is a total combination of health and taste. The addition of extraordinary paneer simply enhances the taste of the Kebab. 
+                        You can add other veggies also.
                     """, 
                     Price = 3.50m
                 },
@@ -68,7 +69,8 @@ namespace KebPOS.Services
                     Name = "Chapli Kebab", 
                     Description = """
                         Chapli Kebabs are a very famous dish of Pakistani cuisine. 
-                        This minced meat has a special taste. The Kebab is made using beef. 
+                        This minced meat has a special taste. 
+                        The Kebab is made using beef. 
                         This Pakistani dish with an Indian special tadka is all you need to have.
                     """, 
                     Price = 4.50m
@@ -147,7 +149,7 @@ namespace KebPOS.Services
                 {
                     Id = 12,
                     Name = "Red Bull",
-                    Description = "Everything that you want in a pizza crust a crisp, chewy and a wonderful base for all your favorite toppings, just in a gluten-free version.",
+                    Description = "Red Bull is a utility drink to be taken against mental or physical weariness or exhaustion.",
                     Price = 2.90m
                 },
                 new Product()

@@ -10,7 +10,6 @@ namespace KebPOS
     {
         public static bool IsValidIdInput(string input)
         {
-
             if (!int.TryParse(input, out int parsedInput))
             {
                 return false;

@@ -17,7 +17,7 @@ namespace KebPOS.Services
                         This Kebab is a total combination of health and taste. The addition of extraordinary paneer simply enhances the taste of the Kebab. 
                         You can add other veggies also.
                     """, 
-                    Price = 3.50m
+                    Price = 3.49m
                 },
                 new Product()
                 { 
@@ -33,7 +33,7 @@ namespace KebPOS.Services
                         These are most popular of all Kebabs. 
                         Steamed vegetables and salads are served along with these Kebabs.
                     """, 
-                    Price = 4.20m
+                    Price = 4.19m
                 },
                 new Product()
                 { 
@@ -47,7 +47,7 @@ namespace KebPOS.Services
                         The special taste of Kebab is due to its cooking style. 
                         The Kebabs are cooked slowly so that the meat juice could spread its flavor.
                         """, 
-                    Price = 3.50m
+                    Price = 3.39m
                 },
                 new Product()
                 { 
@@ -61,7 +61,7 @@ namespace KebPOS.Services
                         The best way of having these yummy Kathi Kebabs is by rolling them in Kathi roll. 
                         You can add lots and lots of chutney on the roll so that the taste of Kebabs enhances your mood also.
                     """, 
-                    Price = 3.30m
+                    Price = 3.37m
                 },
                 new Product()
                 { 
@@ -73,7 +73,7 @@ namespace KebPOS.Services
                         The Kebab is made using beef. 
                         This Pakistani dish with an Indian special tadka is all you need to have.
                     """, 
-                    Price = 4.50m
+                    Price = 4.33m
                 },
                 new Product()
                 { 
@@ -87,7 +87,7 @@ namespace KebPOS.Services
                         It majorly includes larger pieces of meat. 
                         If you are also among the Mughlai cuisine lovers, then you can’t afford to miss such an amazing dish.
                     """, 
-                    Price = 4.50m
+                    Price = 4.36m
                 },
                 new Product()
                 { 
@@ -101,7 +101,7 @@ namespace KebPOS.Services
                         Most of the people prefer doogh which is a yogurt drink with this Kebab. 
                         The dish comes under the category of the side dish, but the taste of the dish is very special.
                     """, 
-                    Price = 4.20m
+                    Price = 4.29m
                 },
                 new Product()
                 { 
@@ -115,7 +115,7 @@ namespace KebPOS.Services
                         We all know how special the taste of “matke ka pani” is. 
                         Similarly, the taste of matka Kebab is very special.
                     """, 
-                    Price = 3.50m
+                    Price = 3.69m
                 },
                 new Product()
                 { 
@@ -125,7 +125,7 @@ namespace KebPOS.Services
                         Dill salmon Kebab is very special Kebab for all seafood lovers and especially for fish lovers. 
                         The dish is very yummy.
                     """, 
-                    Price = 3.50m
+                    Price = 3.99m
                 },
                 new Product()
                 { 
@@ -136,42 +136,42 @@ namespace KebPOS.Services
                         What all you need to do is marinate the mince meat with all the spices. 
                         You can add egg also just to enhance the taste of Kebab.
                     """, 
-                    Price = 3.30m
+                    Price = 3.79m
                 },
                 new Product()
                 { 
                     Id = 11, 
                     Name = "Cappuccino", 
                     Description = "A freshly pulled shot of espresso layered with steamed whole milk and thick rich foam to offer a luxurious velvety texture and complex aroma.", 
-                    Price = 2.50m
+                    Price = 1.49m
                 },
                 new Product()
                 {
                     Id = 12,
                     Name = "Red Bull",
                     Description = "Red Bull is a utility drink to be taken against mental or physical weariness or exhaustion.",
-                    Price = 2.90m
+                    Price = 1.87m
                 },
                 new Product()
                 {
                     Id = 13,
                     Name = "Coca Cola",
                     Description = "Coca-Cola is a carbonated, sweetened soft drink and is the world's best-selling drink. A popular nickname for Coca-Cola is Coke.",
-                    Price = 1.10m
+                    Price = 0.93m
                 },
                 new Product()
                 {
                     Id = 14,
                     Name = "Sprite",
                     Description = "Crisp, refreshing and clean-tasting, Sprite is a lemon and lime-flavoured soft drink.",
-                    Price = 1.10m
+                    Price = 1.99m
                 },
                 new Product()
                 { 
                     Id = 15,
                     Name = "Bonaqua Sparkling",
                     Description = "BonAqua is a high-quality drinking water.",
-                    Price = 1.10m
+                    Price = 1.24m
                 }
             };
             return products;

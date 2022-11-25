@@ -8,7 +8,7 @@ namespace KebPOS
 {
     internal class Validation
     {
-        static public bool IsValidIdInput(string input)
+        public static bool IsValidIdInput(string input)
         {
 
             if (!int.TryParse(input, out int parsedInput))

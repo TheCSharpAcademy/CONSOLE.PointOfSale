@@ -1,6 +1,6 @@
 ﻿namespace KebPOS;
 
-internal class Validation
+public class Validation
 {
     public static bool IsValidIdInput(string input)
     {

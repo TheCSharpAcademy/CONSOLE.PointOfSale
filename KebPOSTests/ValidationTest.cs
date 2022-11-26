@@ -20,7 +20,11 @@ public class ValidationTest
     [TestCase("-3")]
     [TestCase("-99")]
     [TestCase("-1")]
-    public void IsValidInput_ShouldReturnFalse(string id)
+    [TestCase("")]
+    [TestCase("hello world")]
+    [TestCase("36854775807")]
+    [TestCase("         ")]
+    public void IsValidIdInput_ShouldReturnFalse(string id)
     {
         var result = Validation.IsValidIdInput(id);
 

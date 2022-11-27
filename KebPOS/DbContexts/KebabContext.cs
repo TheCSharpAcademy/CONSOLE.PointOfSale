@@ -90,7 +90,5 @@ internal class KebabContext : DbContext
                 OrderId = 3,
                 ProductId = 3,
             });
-
-        
     }
 }

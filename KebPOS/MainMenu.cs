@@ -1,6 +1,5 @@
 namespace KebPOS;
 
-
 public class MainMenu
 {
     internal void InitializeMenu()

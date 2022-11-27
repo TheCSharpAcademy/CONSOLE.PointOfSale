@@ -2,9 +2,9 @@
 
 namespace KebPOS.Services
 {
-    internal class ProductService
+    public class ProductService
     {
-        public List<Product> GetProducts()
+        public static List<Product> GetProducts()
         {
             var products = new List<Product>()
             {

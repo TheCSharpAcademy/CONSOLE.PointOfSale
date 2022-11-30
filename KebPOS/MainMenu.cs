@@ -5,6 +5,7 @@ public class MainMenu
     internal void InitializeMenu()
     {
         bool closeMenu = false;
+        MainUI ui = new MainUI(); 
 
         while (closeMenu == false)
         {
@@ -23,7 +24,8 @@ public class MainMenu
                     closeMenu = true;
                     break;  
                 case "1":
-                    AddNewOrder();
+                    ui.DisplayProductsTable(); 
+                    //AddNewOrder();
                     break;
                 case "2":
                     ViewOrders();

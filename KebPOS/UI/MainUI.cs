@@ -15,14 +15,18 @@ namespace KebPOS.UI
 
         public void DisplayProductsTable(List<Product> products)
         {
+            var ansitable = new Table(); 
+            ansitable.Columns.Add(); 
             var table = GenerateTable();
             foreach (var row in products.Select(p => ToDataRow(p, table)))
             {
-                table.Rows.Add(row); 
+                table.Rows.Add(row);
+                
+                 
             }
             
 
-            var tableToDisplay = table.FromDataTable().Border(TableBorder.None); 
+            var tableToDisplay = table.FromDataTable().Border(TableBorder.Rounded); 
             AnsiConsole.Write(tableToDisplay); 
         }
 

@@ -1,4 +1,5 @@
-﻿using KebPOS.Models;
+﻿using KebPOS.DbContexts;
+using KebPOS.Models;
 
 namespace KebPOS.Services
 {
@@ -175,6 +176,11 @@ namespace KebPOS.Services
                 }
             };
             return products;
+        }
+
+        public List<Order> GetOrders()
+        {
+            return KebabController.GetOrders();
         }
     }
 }

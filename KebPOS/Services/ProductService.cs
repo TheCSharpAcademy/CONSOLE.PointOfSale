@@ -180,7 +180,8 @@ namespace KebPOS.Services
 
         public List<Order> GetOrders()
         {
-            return KebabController.GetOrders();
+            var kebabController = new KebabController();
+            return kebabController.GetOrders();
         }
     }
 }

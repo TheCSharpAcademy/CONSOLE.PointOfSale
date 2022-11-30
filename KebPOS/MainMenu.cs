@@ -7,7 +7,6 @@ public class MainMenu
     internal void InitializeMenu()
     {
         bool closeMenu = false;
-        MainUI ui = new MainUI(); 
         while (closeMenu == false)
         {
             Console.WriteLine("\nWelcome to KebPOS");
@@ -25,8 +24,7 @@ public class MainMenu
                     closeMenu = true;
                     break;  
                 case "1":
-                    ui.DisplayProductsTable(ProductService.GetProducts()); 
-                    //AddNewOrder();
+                    AddNewOrder();
                     break;
                 case "2":
                     ViewOrders();

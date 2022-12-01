@@ -8,23 +8,11 @@ namespace KebPOS.UI
 {
     public class MainUI
     {
-        public void DisplayProductsTable(List<Product> products)
+        public void DisplayTable(List<T> items) where T : class, new()
         {
-            var table = new Table();
-            table.AddColumn("Id"); 
-            table.AddColumn("Name"); 
-            table.AddColumn("Description"); 
-            table.AddColumn("Price"); 
-            table.Border(TableBorder.Rounded);
-            table.Centered();
-            table.Expand();
-            foreach (var p in products)
-            {
-                table.AddRow($"{p.Id}", $"{p.Name}", $"{p.Description}", $"{p.Price}");   
-            }
-
-            // var tableToDisplay = table.FromDataTable().Border(TableBorder.Rounded); 
-            AnsiConsole.Write(table); 
+             List<T> rows = new List<T>(); 
+             T entry = new T(); 
+             var cols = entry.GetType().GetProperties(); 
         }
     }
 }

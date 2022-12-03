@@ -1,3 +1,4 @@
+using KebPOS.Models;
 using KebPOS.UI; 
 using KebPOS.Services; 
 namespace KebPOS;
@@ -6,6 +7,7 @@ public class MainMenu
 {
     internal void InitializeMenu()
     {
+        MainUi ui = new MainUi(); 
         bool closeMenu = false;
         while (closeMenu == false)
         {
@@ -24,7 +26,9 @@ public class MainMenu
                     closeMenu = true;
                     break;  
                 case "1":
-                    AddNewOrder();
+                     //Test Adding data to table
+                     //ui.DisplayTable(ProductService.GetProducts());                   
+                    //AddNewOrder();
                     break;
                 case "2":
                     ViewOrders();

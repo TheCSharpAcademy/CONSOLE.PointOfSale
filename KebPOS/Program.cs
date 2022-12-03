@@ -1,6 +1,5 @@
-﻿// See https://aka.ms/new-console-template for more information
-using KebPOS;
+﻿using KebPOS;
 
-MainMenu menu = new MainMenu();
+MainMenu menu = new();
 
 menu.InitializeMenu(); 

@@ -1,5 +1,3 @@
-using KebPOS.Models;
-
 namespace KebPOS.Services;
 
 public class ShoppingService
@@ -14,6 +12,18 @@ public class ShoppingService
             Console.WriteLine(product.Name);
             Console.WriteLine(product.Description);
             Console.WriteLine(product.Price);
+        }
+    }
+    
+    public void GetOrders()
+    {
+        var kebabController = new KebabController();
+        var orders = kebabController.GetOrders();
+        foreach (var order in orders)
+        {
+            Console.WriteLine(order.Id);
+            Console.WriteLine(order.OrderDate);
+            Console.WriteLine(order.TotalPrice);
         }
     }
 }

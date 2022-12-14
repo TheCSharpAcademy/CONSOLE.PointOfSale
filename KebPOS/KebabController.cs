@@ -3,7 +3,7 @@ using KebPOS.Models;
 
 namespace KebPOS;
 
-internal class KebabController
+public class KebabController
 {
     public List<Product> GetProducts()
     {

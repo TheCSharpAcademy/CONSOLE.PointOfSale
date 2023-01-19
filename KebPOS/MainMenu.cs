@@ -1,3 +1,6 @@
+using KebPOS.Models;
+using KebPOS.Services;
+
 namespace KebPOS;
 
 public class MainMenu
@@ -40,7 +43,14 @@ public class MainMenu
 
     private void AddNewOrder()
     {
-        throw new NotImplementedException();
+        string output = "+------> Menu <------+\n";
+        List<Product> products = ProductService.GetProducts();
+        foreach (Product product in products)
+        {
+            output += $"[#{product.Id}] {product.Name}\n";
+        }
+        Console.WriteLine(output);
+        UserInput.CreateOrder();
     }
 
     private void ViewOrders()

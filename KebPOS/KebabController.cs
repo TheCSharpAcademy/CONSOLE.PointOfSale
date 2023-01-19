@@ -16,4 +16,15 @@ public class KebabController
         using var db = new KebabContext();
         return db.Orders.OrderBy(x => x.OrderDate).ToList();
     }
+
+    public static void AddOrder(Order order)
+    {
+        try
+        {
+            using var db = new KebabContext();
+            db.Orders.Add(order);
+            db.SaveChanges();
+        }
+        catch (Exception e) { Console.WriteLine(e); }
+    }
 }

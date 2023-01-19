@@ -13,7 +13,8 @@ internal class KebabContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         // Data source to be replaced with config connection string.
-        optionsBuilder.UseSqlite(@"Data Source=Kebab.db;");
+        //string projPath = Path.GetFullPath(@"..\..\..\");
+        optionsBuilder.UseSqlite($"Data Source=Kebab.db;");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -22,14 +22,23 @@ public class UserInput
         {
             OrderDate = DateTime.Now,
         };
-        GetProductsForOrder(order);
-        order.TotalPrice = order.OrderProducts.Sum(x => x.Product.Price);
+        var products = GetProductsForOrder(order);
+        var orderProducts = new List<OrderProduct>();
+        foreach (var product in products)
+        {
+            orderProducts.Add(new OrderProduct()
+            {
+                ProductId = product.Id
+            });
+        }
+        order.TotalPrice = products.Sum(x => x.Price);
+        order.OrderProducts = orderProducts;
         KebabController.AddOrder(order);
     }
 
-    private static void GetProductsForOrder(Order order)
+    private static List<Product> GetProductsForOrder(Order order)
     {
-        List<OrderProduct> products = new List<OrderProduct>();
+        var products = new List<Product>();
         bool orderComplete = false;
         while (!orderComplete)
         {
@@ -41,27 +50,15 @@ public class UserInput
             }
             else
             {
-                OrderProduct orderProduct = GetOrderProduct(order, input);
-                products.Add(orderProduct);
+                while (!Validation.IsValidProductId(input))
+                {
+                    Console.WriteLine("Invalid Product ID: Please try again.");
+                    input = Console.ReadLine();
+                }
+                var requestedProduct = ProductService.GetProducts().Where(x => x.Id == int.Parse(input)).FirstOrDefault();
+                products.Add(requestedProduct);
             }
         }
-        order.OrderProducts = products;
-    }
-
-    private static OrderProduct GetOrderProduct(Order order, string input)
-    {
-        while (!Validation.IsValidProductId(input))
-        {
-            Console.WriteLine("Invalid Product ID: Please try again.");
-            input = Console.ReadLine();
-        }
-        Product requestedProduct = ProductService.GetProducts().Where(x => x.Id == int.Parse(input)).FirstOrDefault();
-        var orderProduct = new OrderProduct()
-        {
-            Order = order,
-            ProductId = requestedProduct.Id,
-            Product = requestedProduct,
-        };
-        return orderProduct;
+        return products;
     }
 }

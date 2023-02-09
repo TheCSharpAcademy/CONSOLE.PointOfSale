@@ -33,26 +33,6 @@ namespace KebPOS.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Orders");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            OrderDate = new DateTime(2022, 11, 27, 6, 34, 3, 450, DateTimeKind.Utc).AddTicks(638),
-                            TotalPrice = 11.81m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            OrderDate = new DateTime(2022, 11, 27, 6, 38, 3, 450, DateTimeKind.Utc).AddTicks(645),
-                            TotalPrice = 6.86m
-                        },
-                        new
-                        {
-                            Id = 3,
-                            OrderDate = new DateTime(2022, 11, 27, 6, 43, 3, 450, DateTimeKind.Utc).AddTicks(655),
-                            TotalPrice = 7.75m
-                        });
                 });
 
             modelBuilder.Entity("KebPOS.Models.OrderProduct", b =>
@@ -68,43 +48,6 @@ namespace KebPOS.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("OrderProducts");
-
-                    b.HasData(
-                        new
-                        {
-                            OrderId = 1,
-                            ProductId = 1
-                        },
-                        new
-                        {
-                            OrderId = 1,
-                            ProductId = 5
-                        },
-                        new
-                        {
-                            OrderId = 1,
-                            ProductId = 9
-                        },
-                        new
-                        {
-                            OrderId = 2,
-                            ProductId = 1
-                        },
-                        new
-                        {
-                            OrderId = 2,
-                            ProductId = 4
-                        },
-                        new
-                        {
-                            OrderId = 3,
-                            ProductId = 6
-                        },
-                        new
-                        {
-                            OrderId = 3,
-                            ProductId = 3
-                        });
                 });
 
             modelBuilder.Entity("KebPOS.Models.Product", b =>
@@ -135,70 +78,70 @@ namespace KebPOS.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "    The other name of this yummy Kebab is “good for you Kebab” the Kebab is made up of paneer, raisins, oats and creamy yogurt. \r\n    This Kebab is a total combination of health and taste. The addition of extraordinary paneer simply enhances the taste of the Kebab. \r\n    You can add other veggies also.",
+                            Description = "    The other name of this yummy Kebab is “good for you Kebab” the Kebab is made up of paneer, raisins, oats and creamy yogurt. \n    This Kebab is a total combination of health and taste. The addition of extraordinary paneer simply enhances the taste of the Kebab. \n    You can add other veggies also.",
                             Name = "Yogurt Kebab",
                             Price = 3.49m
                         },
                         new
                         {
                             Id = 2,
-                            Description = "    This Kebab is one among all the most popular and delicious Kebabs. \r\n    The special part of this Kebab is that they are grilled on the skewer. \r\n    Here the word shish means skewer. And the word Kebab stands for meat. \r\n    This dish comes under the category of side dish. \r\n    This dish is very famous in Turkey. \r\n    Just imagine the taste of Turkish dish with an Indian tadka. \r\n    These are most popular of all Kebabs. \r\n    Steamed vegetables and salads are served along with these Kebabs.",
+                            Description = "    This Kebab is one among all the most popular and delicious Kebabs. \n    The special part of this Kebab is that they are grilled on the skewer. \n    Here the word shish means skewer. And the word Kebab stands for meat. \n    This dish comes under the category of side dish. \n    This dish is very famous in Turkey. \n    Just imagine the taste of Turkish dish with an Indian tadka. \n    These are most popular of all Kebabs. \n    Steamed vegetables and salads are served along with these Kebabs.",
                             Name = "Shish Kebab",
                             Price = 4.19m
                         },
                         new
                         {
                             Id = 3,
-                            Description = "Another name of this Kebab is rotating Kebab. \r\nAnd this wonderful name is given to this Kebab because it is made on a vertical rotating spit. \r\nThis comes under the category of popular fast food loved by all. \r\nThe Kebab is made of lamb’s meat. \r\nThe special taste of Kebab is due to its cooking style. \r\nThe Kebabs are cooked slowly so that the meat juice could spread its flavor.",
+                            Description = "Another name of this Kebab is rotating Kebab. \nAnd this wonderful name is given to this Kebab because it is made on a vertical rotating spit. \nThis comes under the category of popular fast food loved by all. \nThe Kebab is made of lamb’s meat. \nThe special taste of Kebab is due to its cooking style. \nThe Kebabs are cooked slowly so that the meat juice could spread its flavor.",
                             Name = "Doner Kebab",
                             Price = 3.39m
                         },
                         new
                         {
                             Id = 4,
-                            Description = "    Kathi Kebabs are very famous as they are made using tandoor. \r\n    This is the most popular Indian dish made using tandoor. \r\n    We all know the taste of tandoori chicken and the reason behind its scrumptious taste is tandoor. \r\n    This Kebab is a very wonderful snack to have. \r\n    The best way of having these yummy Kathi Kebabs is by rolling them in Kathi roll. \r\n    You can add lots and lots of chutney on the roll so that the taste of Kebabs enhances your mood also.",
+                            Description = "    Kathi Kebabs are very famous as they are made using tandoor. \n    This is the most popular Indian dish made using tandoor. \n    We all know the taste of tandoori chicken and the reason behind its scrumptious taste is tandoor. \n    This Kebab is a very wonderful snack to have. \n    The best way of having these yummy Kathi Kebabs is by rolling them in Kathi roll. \n    You can add lots and lots of chutney on the roll so that the taste of Kebabs enhances your mood also.",
                             Name = "Kathi Kebab",
                             Price = 3.37m
                         },
                         new
                         {
                             Id = 5,
-                            Description = "    Chapli Kebabs are a very famous dish of Pakistani cuisine. \r\n    This minced meat has a special taste. \r\n    The Kebab is made using beef. \r\n    This Pakistani dish with an Indian special tadka is all you need to have.",
+                            Description = "    Chapli Kebabs are a very famous dish of Pakistani cuisine. \n    This minced meat has a special taste. \n    The Kebab is made using beef. \n    This Pakistani dish with an Indian special tadka is all you need to have.",
                             Name = "Chapli Kebab",
                             Price = 4.33m
                         },
                         new
                         {
                             Id = 6,
-                            Description = "    Burrah Kebabs are also known as barrah Kebab. \r\n    The Kebab is made up of beef and lots and lots of spices. \r\n    This Kebab is very famous Kebab of Mughlai cuisine. \r\n    This dish comes under the heavy meal category. \r\n    It majorly includes larger pieces of meat. \r\n    If you are also among the Mughlai cuisine lovers, then you can’t afford to miss such an amazing dish.",
+                            Description = "    Burrah Kebabs are also known as barrah Kebab. \n    The Kebab is made up of beef and lots and lots of spices. \n    This Kebab is very famous Kebab of Mughlai cuisine. \n    This dish comes under the heavy meal category. \n    It majorly includes larger pieces of meat. \n    If you are also among the Mughlai cuisine lovers, then you can’t afford to miss such an amazing dish.",
                             Name = "Burrah Kebab",
                             Price = 4.36m
                         },
                         new
                         {
                             Id = 7,
-                            Description = "    This is an Irani dish with an Indian tadka. \r\n    This is, in fact, national food of Iran. \r\n    The dish is basic but yummy in taste. \r\n    They are always served with buttered rice. \r\n    Most of the people prefer doogh which is a yogurt drink with this Kebab. \r\n    The dish comes under the category of the side dish, but the taste of the dish is very special.",
+                            Description = "    This is an Irani dish with an Indian tadka. \n    This is, in fact, national food of Iran. \n    The dish is basic but yummy in taste. \n    They are always served with buttered rice. \n    Most of the people prefer doogh which is a yogurt drink with this Kebab. \n    The dish comes under the category of the side dish, but the taste of the dish is very special.",
                             Name = "Chelow Kebab",
                             Price = 4.29m
                         },
                         new
                         {
                             Id = 8,
-                            Description = "    The name of the Kebab is testi Kebab, and here the word testi means jug. \r\n    Yes, the Kebab is served in a pot. \r\n    You can use dough or foil to cover the pot. \r\n    The pot is broken while eating. \r\n    We all know how special the taste of “matke ka pani” is. \r\n    Similarly, the taste of matka Kebab is very special.",
+                            Description = "    The name of the Kebab is testi Kebab, and here the word testi means jug. \n    Yes, the Kebab is served in a pot. \n    You can use dough or foil to cover the pot. \n    The pot is broken while eating. \n    We all know how special the taste of “matke ka pani” is. \n    Similarly, the taste of matka Kebab is very special.",
                             Name = "Testi Kebab",
                             Price = 3.69m
                         },
                         new
                         {
                             Id = 9,
-                            Description = "    Dill salmon Kebab is very special Kebab for all seafood lovers and especially for fish lovers. \r\n    The dish is very yummy.",
+                            Description = "    Dill salmon Kebab is very special Kebab for all seafood lovers and especially for fish lovers. \n    The dish is very yummy.",
                             Name = "Dill Salmon Kebab",
                             Price = 3.99m
                         },
                         new
                         {
                             Id = 10,
-                            Description = "    Lamb Kebabs are very easy to make. \r\n    What all you need to do is marinate the mince meat with all the spices. \r\n    You can add egg also just to enhance the taste of Kebab.",
+                            Description = "    Lamb Kebabs are very easy to make. \n    What all you need to do is marinate the mince meat with all the spices. \n    You can add egg also just to enhance the taste of Kebab.",
                             Name = "Lamb Kebab",
                             Price = 3.79m
                         },

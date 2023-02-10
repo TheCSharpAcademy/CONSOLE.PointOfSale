@@ -1,7 +1,11 @@
+using KebPOS.Models;
+
 namespace KebPOS;
 
 public class MainMenu
 {
+    private readonly KebabController _kebabController = new();
+    private readonly UserInput _userInput = new();
     internal void InitializeMenu()
     {
         bool closeMenu = false;
@@ -19,9 +23,9 @@ public class MainMenu
 
             switch (userInput)
             {
-                case "0": 
+                case "0":
                     closeMenu = true;
-                    break;  
+                    break;
                 case "1":
                     AddNewOrder();
                     break;
@@ -40,7 +44,68 @@ public class MainMenu
 
     private void AddNewOrder()
     {
-        throw new NotImplementedException();
+        List<OrderProduct> orderProductsList = new();
+        var order = new Order();
+        decimal totalPrice = 0;
+
+        string answer;
+        do
+        {
+            var products = _kebabController.GetProducts();
+
+            DisplayProducts(products);
+
+            var selectedProduct = SelectProduct(products);
+
+            var orderProduct = new OrderProduct
+            {
+                ProductId = selectedProduct!.Id
+            };
+
+            totalPrice += selectedProduct!.Price;
+
+            orderProductsList.Add(orderProduct);
+
+            Console.Write("Do you want to add another product to your order? yes/no: ");
+            answer = _userInput.GetValidAnswer();
+        } while (answer != "n" && answer != "no");
+
+        // var order = new Order
+        // {
+        //     OrderDate = DateTime.Now,
+        //     TotalPrice = totalPrice,
+        // };
+
+        _kebabController.AddOrders(order/*, orderProductsList*/);
+    }
+
+    private Product SelectProduct(List<Product> products)
+    {
+        Console.Write("Select a product by Id to add to cart: ");
+        var choice = _userInput.GetId();
+
+        var id = int.Parse(choice);
+
+        while (!products.Exists(p => p.Id == id))
+        {
+            Console.Write("Select a product by Id to add to cart: ");
+            choice = _userInput.GetId();
+
+            id = int.Parse(choice);
+        }
+
+
+        var selectedProduct = products.First(p => p.Id == id);
+
+        return selectedProduct;
+    }
+
+    private static void DisplayProducts(List<Product> products)
+    {
+        foreach (var product in products)
+        {
+            Console.WriteLine($"{product.Id}\n{product.Name}\n{product.Description}\n{product.Price}\n\n");
+        }
     }
 
     private void ViewOrders()

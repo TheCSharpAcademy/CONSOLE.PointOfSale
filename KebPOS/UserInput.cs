@@ -1,5 +1,3 @@
-using KebPOS.Models;
-
 namespace KebPOS;
 
 public class UserInput
@@ -13,5 +11,16 @@ public class UserInput
         }
 
         return id;
+    }
+
+    public string GetValidAnswer()
+    {
+        var answer = Console.ReadLine();
+        while (!Validation.IsValidAnswer(answer))
+        {
+            answer = Console.ReadLine();
+        }
+
+        return answer;
     }
 }

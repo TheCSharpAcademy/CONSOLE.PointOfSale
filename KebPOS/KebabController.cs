@@ -17,12 +17,11 @@ public class KebabController
         return db.Orders.OrderBy(x => x.OrderDate).ToList();
     }
 
-    public void AddOrders(Order order/*, List<OrderProduct> orderProductsList*/)
+    public void AddOrders(List<OrderProduct> orderProductsList)
     {
         using var db = new KebabContext();
 
-        // db.OrderProducts.AddRange(orderProductsList);
-        db.Orders.Add(order);
+        db.OrderProducts.AddRange(orderProductsList);
 
         db.SaveChanges();
     }

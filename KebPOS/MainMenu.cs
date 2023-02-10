@@ -44,8 +44,8 @@ public class MainMenu
 
     private void AddNewOrder()
     {
-        List<OrderProduct> orderProductsList = new();
-        var order = new Order();
+        List<int> productIds = new List<int>();
+
         decimal totalPrice = 0;
 
         string answer;
@@ -55,31 +55,58 @@ public class MainMenu
 
             DisplayProducts(products);
 
-            var selectedProduct = SelectProduct(products);
+            var id = GetSelectedProduct(products);
 
-            var orderProduct = new OrderProduct
-            {
-                ProductId = selectedProduct!.Id
-            };
+            totalPrice += GetPrice(id, products);
 
-            totalPrice += selectedProduct!.Price;
-
-            orderProductsList.Add(orderProduct);
+            productIds.Add(id);
 
             Console.Write("Do you want to add another product to your order? yes/no: ");
             answer = _userInput.GetValidAnswer();
         } while (answer != "n" && answer != "no");
 
-        // var order = new Order
-        // {
-        //     OrderDate = DateTime.Now,
-        //     TotalPrice = totalPrice,
-        // };
+        var order = CreateNewOrder(totalPrice);
 
-        _kebabController.AddOrders(order/*, orderProductsList*/);
+        var orderProductsList = GetOrderProductList(productIds, order);
+
+        _kebabController.AddOrders(orderProductsList);
     }
 
-    private Product SelectProduct(List<Product> products)
+    private Order CreateNewOrder(decimal totalPrice)
+    {
+        return new Order
+        {
+            OrderDate = DateTime.Now,
+            TotalPrice = totalPrice,
+        };
+    }
+
+    private List<OrderProduct> GetOrderProductList(List<int> productIds, Order order)
+    {
+        List<OrderProduct> orderProductsList = new();
+
+        foreach (var productId in productIds)
+        {
+            var orderProduct = new OrderProduct
+            {
+                ProductId = productId,
+                Order = order
+            };
+
+            orderProductsList.Add(orderProduct);
+        }
+
+        return orderProductsList;
+    }
+
+    private decimal GetPrice(int id, List<Product> products)
+    {
+        var price = products.First(p => p.Id == id).Price;
+
+        return price;
+    }
+
+    private int GetSelectedProduct(List<Product> products)
     {
         Console.Write("Select a product by Id to add to cart: ");
         var choice = _userInput.GetId();
@@ -94,13 +121,10 @@ public class MainMenu
             id = int.Parse(choice);
         }
 
-
-        var selectedProduct = products.First(p => p.Id == id);
-
-        return selectedProduct;
+        return id;
     }
 
-    private static void DisplayProducts(List<Product> products)
+    private void DisplayProducts(List<Product> products)
     {
         foreach (var product in products)
         {

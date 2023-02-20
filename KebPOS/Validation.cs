@@ -1,7 +1,4 @@
-﻿using KebPOS.Models;
-using KebPOS.Services;
-
-namespace KebPOS;
+﻿namespace KebPOS;
 
 public class Validation
 {
@@ -10,16 +7,10 @@ public class Validation
         return int.TryParse(input, out int parsedInput) ? parsedInput > 0 : false;
     }
 
-    internal static bool IsValidProductId(string? input)
+    public static bool IsValidAnswer(string? answer)
     {
-        List<Product> validProducts = ProductService.GetProducts();
-        if (!Int32.TryParse(input, out int id))
-        {
-            return false;
-        }
-        else 
-        {
-            return validProducts.Any(x => x.Id == id);
-        }
+        var answersArray = new string[4] { "y", "yes", "n", "no" };
+
+        return !string.IsNullOrWhiteSpace(answer) && answersArray.Contains(answer);
     }
 }

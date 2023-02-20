@@ -1,10 +1,11 @@
 using KebPOS.Models;
-using KebPOS.Services;
 
 namespace KebPOS;
 
 public class MainMenu
 {
+    private readonly KebabController _kebabController = new();
+    private readonly UserInput _userInput = new();
     internal void InitializeMenu()
     {
         bool closeMenu = false;
@@ -22,9 +23,9 @@ public class MainMenu
 
             switch (userInput)
             {
-                case "0": 
+                case "0":
                     closeMenu = true;
-                    break;  
+                    break;
                 case "1":
                     AddNewOrder();
                     break;
@@ -43,14 +44,92 @@ public class MainMenu
 
     private void AddNewOrder()
     {
-        string output = "+------> Menu <------+\n";
-        List<Product> products = ProductService.GetProducts();
-        foreach (Product product in products)
+        List<int> productIds = new List<int>();
+
+        decimal totalPrice = 0;
+
+        string answer;
+        do
         {
-            output += $"[#{product.Id}] {product.Name}\n";
+            var products = _kebabController.GetProducts();
+
+            DisplayProducts(products);
+
+            var id = GetSelectedProduct(products);
+
+            totalPrice += GetPrice(id, products);
+
+            productIds.Add(id);
+
+            Console.Write("Do you want to add another product to your order? yes/no: ");
+            answer = _userInput.GetValidAnswer();
+        } while (answer != "n" && answer != "no");
+
+        var order = CreateNewOrder(totalPrice);
+
+        var orderProductsList = GetOrderProductList(productIds, order);
+
+        _kebabController.AddOrders(orderProductsList);
+    }
+
+    private Order CreateNewOrder(decimal totalPrice)
+    {
+        return new Order
+        {
+            OrderDate = DateTime.Now,
+            TotalPrice = totalPrice,
+        };
+    }
+
+    private List<OrderProduct> GetOrderProductList(List<int> productIds, Order order)
+    {
+        List<OrderProduct> orderProductsList = new();
+
+        foreach (var productId in productIds)
+        {
+            var orderProduct = new OrderProduct
+            {
+                ProductId = productId,
+                Order = order
+            };
+
+            orderProductsList.Add(orderProduct);
         }
-        Console.WriteLine(output);
-        UserInput.CreateOrder();
+
+        return orderProductsList;
+    }
+
+    private decimal GetPrice(int id, List<Product> products)
+    {
+        var price = products.First(p => p.Id == id).Price;
+
+        return price;
+    }
+
+    private int GetSelectedProduct(List<Product> products)
+    {
+        Console.Write("Select a product by Id to add to cart: ");
+        var choice = _userInput.GetId();
+
+        var id = int.Parse(choice);
+
+        while (!products.Exists(p => p.Id == id))
+        {
+            Console.Write("Select a product by Id to add to cart: ");
+            choice = _userInput.GetId();
+
+            id = int.Parse(choice);
+        }
+
+        return id;
+    }
+
+    private void DisplayProducts(List<Product> products)
+    {
+        foreach (var product in products)
+        {
+            Console.WriteLine($"{product.Id}\n{product.Name}\n{product.Description}\n{product.Price}\n\n");
+        }
     }
 
     private void ViewOrders()

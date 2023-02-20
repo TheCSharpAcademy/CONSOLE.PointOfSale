@@ -134,7 +134,18 @@ public class MainMenu
 
     private void ViewOrders()
     {
-        throw new NotImplementedException();
+        List<Order> orders = _kebabController.GetOrders();
+        string output = $"+----- Current Orders ({orders.Count}) -----+\n";
+        foreach (var order in orders)
+        {
+            output += $"[#{orders.IndexOf(order) + 1}] {order.OrderDate} - ${order.TotalPrice}\n";
+            foreach (var item in order.OrderProducts) 
+            {
+                output += $"\t{item.Product.Name} - ${item.Product.Price}\n";
+            }
+            output += "\n";
+        }
+        Console.WriteLine(output);
     }
 
     private void ViewOrderDetails()

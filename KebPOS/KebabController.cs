@@ -1,5 +1,6 @@
 ﻿using KebPOS.DbContexts;
 using KebPOS.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace KebPOS;
 
@@ -14,7 +15,7 @@ public class KebabController
     public List<Order> GetOrders()
     {
         using var db = new KebabContext();
-        return db.Orders.OrderBy(x => x.OrderDate).ToList();
+        return db.Orders.OrderBy(x => x.OrderDate).Include(o => o.OrderProducts).ThenInclude(p => p.Product).ToList();
     }
 
     public void AddOrders(List<OrderProduct> orderProductsList)

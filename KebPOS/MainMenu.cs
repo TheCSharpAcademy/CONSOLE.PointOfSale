@@ -150,6 +150,29 @@ public class MainMenu
 
     private void ViewOrderDetails()
     {
-        throw new NotImplementedException();
+        // Ask user to enter id of an order to view
+        Console.Write("Select an order by its Id to view the order details: ");
+        var choice = _userInput.GetId();
+
+        int id = int.Parse(choice);
+
+        Order order = _kebabController.GetOrder(id);
+
+        if (order is null)
+        {
+            Console.WriteLine($"Order with Id '{id}' doesn't exist.");
+        }
+        else
+        {
+            string output = $"[#{order.Id}] {order.OrderDate} - ${order.TotalPrice}\n";
+            foreach (var item in order.OrderProducts)
+            {
+                output += $"\t{item.Product.Name} - ${item.Product.Price}\n";
+            }
+
+            Console.WriteLine(output);
+        }
+
+        // Ask user whether they want to go back to the main menu, or view the order details of another order
     }
 }

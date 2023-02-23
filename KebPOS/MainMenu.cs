@@ -139,11 +139,6 @@ public class MainMenu
         foreach (var order in orders)
         {
             output += $"[#{orders.IndexOf(order) + 1}] {order.OrderDate} - ${order.TotalPrice}\n";
-            foreach (var item in order.OrderProducts) 
-            {
-                output += $"\t{item.Product.Name} - ${item.Product.Price}\n";
-            }
-            output += "\n";
         }
         Console.WriteLine(output);
     }

@@ -157,11 +157,11 @@ public class MainMenu
 
         if (order is null)
         {
-            Console.WriteLine($"Order with Id '{id}' doesn't exist.");
+                Console.WriteLine($"\nOrder with Id '{id}' doesn't exist.\n");
         }
         else
         {
-                string output = $"+----- Viewing Order Id ({order.Id}) -----+\n";
+                string output = $"\n+----- Viewing Order Id ({order.Id}) -----+\n";
                 output += $"[#{order.Id}] {order.OrderDate} - ${order.TotalPrice}\n";
             foreach (var item in order.OrderProducts)
             {

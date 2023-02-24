@@ -145,8 +145,10 @@ public class MainMenu
 
     private void ViewOrderDetails()
     {
-        // Ask user to enter id of an order to view
-        Console.Write("Select an order by its Id to view the order details: ");
+        string answer;
+        do
+        {
+            Console.Write("\nSelect an order by its Id to view the order details: ");
         var choice = _userInput.GetId();
 
         int id = int.Parse(choice);
@@ -159,7 +161,8 @@ public class MainMenu
         }
         else
         {
-            string output = $"[#{order.Id}] {order.OrderDate} - ${order.TotalPrice}\n";
+                string output = $"+----- Viewing Order Id ({order.Id}) -----+\n";
+                output += $"[#{order.Id}] {order.OrderDate} - ${order.TotalPrice}\n";
             foreach (var item in order.OrderProducts)
             {
                 output += $"\t{item.Product.Name} - ${item.Product.Price}\n";
@@ -168,6 +171,8 @@ public class MainMenu
             Console.WriteLine(output);
         }
 
-        // Ask user whether they want to go back to the main menu, or view the order details of another order
+            Console.Write("Do you want to view another orders, order details? yes/no: ");
+            answer = _userInput.GetValidAnswer();
+        } while (answer != "n" && answer != "no");
     }
 }

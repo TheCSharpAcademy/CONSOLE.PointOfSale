@@ -30,4 +30,44 @@ public class ValidationTest
 
         Assert.IsFalse(result);
     }
+
+    [TestCase("y")]
+    [TestCase("yes")]
+    [TestCase("n")]
+    [TestCase("no")]
+    public void IsValidAnswer_ShouldReturnTrue(string input)
+    {
+        var result = Validation.IsValidAnswer(input);
+
+        Assert.IsTrue(result);
+    }
+
+    [TestCase("")]
+    [TestCase("    ")]
+    [TestCase("!*&")]
+    [TestCase("faf")]
+    [TestCase(" bacon")]
+    [TestCase("ham ")]
+    [TestCase(" eggs ")]
+    [TestCase("-111")]
+    [TestCase("12")]
+    [TestCase("yess")]
+    [TestCase("noo")]
+    [TestCase("Y")]
+    [TestCase("Yes")]
+    [TestCase("YeS")]
+    [TestCase("yeS")]
+    [TestCase("N")]
+    [TestCase("NO")]
+    [TestCase(" yes")]
+    [TestCase("n ")]
+    [TestCase(" no ")]
+    [TestCase("n0")]
+    [TestCase("y3s")]
+    public void IsValidAnswer_ShouldReturnFalse(string input)
+    {
+        var result = Validation.IsValidAnswer(input);
+
+        Assert.IsFalse(result);
+    }
 }

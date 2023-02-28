@@ -139,17 +139,40 @@ public class MainMenu
         foreach (var order in orders)
         {
             output += $"[#{orders.IndexOf(order) + 1}] {order.OrderDate} - ${order.TotalPrice}\n";
-            foreach (var item in order.OrderProducts) 
-            {
-                output += $"\t{item.Product.Name} - ${item.Product.Price}\n";
-            }
-            output += "\n";
         }
         Console.WriteLine(output);
     }
 
     private void ViewOrderDetails()
     {
-        throw new NotImplementedException();
+        string answer;
+        do
+        {
+            Console.Write("\nSelect an order by its Id to view the order details: ");
+        var choice = _userInput.GetId();
+
+        int id = int.Parse(choice);
+
+        Order order = _kebabController.GetOrder(id);
+
+        if (order is null)
+        {
+                Console.WriteLine($"\nOrder with Id '{id}' doesn't exist.\n");
+        }
+        else
+        {
+                string output = $"\n+----- Viewing Order Id ({order.Id}) -----+\n";
+                output += $"[#{order.Id}] {order.OrderDate} - ${order.TotalPrice}\n";
+            foreach (var item in order.OrderProducts)
+            {
+                output += $"\t{item.Product.Name} - ${item.Product.Price}\n";
+            }
+
+            Console.WriteLine(output);
+        }
+
+            Console.Write("Do you want to view another orders, order details? yes/no: ");
+            answer = _userInput.GetValidAnswer();
+        } while (answer != "n" && answer != "no");
     }
 }

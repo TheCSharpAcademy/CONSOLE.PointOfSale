@@ -145,34 +145,41 @@ public class MainMenu
 
     private void ViewOrderDetails()
     {
-        string answer;
-        do
+        List<Order> orders = _kebabController.GetOrders();
+
+        ViewOrders();
+
+        Console.Write("\nSelect an order by its index to view the order details: ");
+        var indexString = _userInput.GetId();
+        int index = int.Parse(indexString);
+
+        Order order = new();
+        try
         {
-            Console.Write("\nSelect an order by its Id to view the order details: ");
-        var choice = _userInput.GetId();
-
-        int id = int.Parse(choice);
-
-        Order order = _kebabController.GetOrder(id);
-
-        if (order is null)
-        {
-                Console.WriteLine($"\nOrder with Id '{id}' doesn't exist.\n");
+            order = orders[index - 1];
         }
-        else
+        catch (ArgumentOutOfRangeException)
         {
-                string output = $"\n+----- Viewing Order Id ({order.Id}) -----+\n";
-                output += $"[#{order.Id}] {order.OrderDate} - ${order.TotalPrice}\n";
-            foreach (var item in order.OrderProducts)
-            {
-                output += $"\t{item.Product.Name} - ${item.Product.Price}\n";
-            }
-
-            Console.WriteLine(output);
+            Console.WriteLine($"Order with the index '{index}' does not exist. Press any key to try again...");
+            Console.ReadLine();
+            ViewOrderDetails();
         }
 
-            Console.Write("Do you want to view another orders, order details? yes/no: ");
-            answer = _userInput.GetValidAnswer();
-        } while (answer != "n" && answer != "no");
+        string output = $"\n+----- Viewing Order -----+\n";
+        output += $"[#{index}] {order.OrderDate} - ${order.TotalPrice}\n";
+        foreach (var item in order.OrderProducts)
+        {
+            output += $"\t{item.Product.Name} - ${item.Product.Price}\n";
+        }
+
+        Console.WriteLine(output);
+
+        Console.Write("Do you want to view another orders, order details? yes/no: ");
+        string answer = _userInput.GetValidAnswer();
+
+        if (answer == "y" || answer == "yes")
+        {
+            ViewOrderDetails();
+        }
     }
 }

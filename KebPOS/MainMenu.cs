@@ -30,7 +30,7 @@ public class MainMenu
                     AddNewOrder();
                     break;
                 case "2":
-                    ViewOrders();
+                    ViewOrders(_kebabController.GetOrders());
                     break;
                 case "3":
                     ViewOrderDetails();
@@ -132,24 +132,53 @@ public class MainMenu
         }
     }
 
-    private void ViewOrders()
+    private void ViewOrders(List<Order> orders)
     {
-        List<Order> orders = _kebabController.GetOrders();
         string output = $"+----- Current Orders ({orders.Count}) -----+\n";
         foreach (var order in orders)
         {
             output += $"[#{orders.IndexOf(order) + 1}] {order.OrderDate} - ${order.TotalPrice}\n";
-            foreach (var item in order.OrderProducts) 
-            {
-                output += $"\t{item.Product.Name} - ${item.Product.Price}\n";
-            }
-            output += "\n";
         }
         Console.WriteLine(output);
     }
 
     private void ViewOrderDetails()
     {
-        throw new NotImplementedException();
+        List<Order> orders = _kebabController.GetOrders();
+
+        ViewOrders(orders);
+
+        Console.Write("\nSelect an order by its index to view the order details: ");
+        var indexString = _userInput.GetId();
+        int index = int.Parse(indexString);
+
+        Order order = new();
+        try
+        {
+            order = orders[index - 1];
+        }
+        catch (ArgumentOutOfRangeException)
+        {
+            Console.WriteLine($"Order with the index '{index}' does not exist. Press any key to try again...");
+            Console.ReadLine();
+            ViewOrderDetails();
+        }
+
+        string output = $"\n+----- Viewing Order -----+\n";
+        output += $"[#{index}] {order.OrderDate} - ${order.TotalPrice}\n";
+        foreach (var item in order.OrderProducts)
+        {
+            output += $"\t{item.Product.Name} - ${item.Product.Price}\n";
+        }
+
+        Console.WriteLine(output);
+
+        Console.Write("Do you want to view another orders, order details? yes/no: ");
+        string answer = _userInput.GetValidAnswer();
+
+        if (answer == "y" || answer == "yes")
+        {
+            ViewOrderDetails();
+        }
     }
 }

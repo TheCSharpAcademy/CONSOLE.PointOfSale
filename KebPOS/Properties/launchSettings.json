@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "KebPOS": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Pablo\\community\\CONSOLE.PointOfSale\\KebPOS"
+    }
+  }
+}

@@ -14,7 +14,7 @@ internal class KebabContext : DbContext
     {
         // Data source to be replaced with config connection string.
         //string projPath = Path.GetFullPath(@"..\..\..\");
-        optionsBuilder.UseSqlite($"Data Source=Kebab.db;");
+        optionsBuilder.UseSqlite($"Data Source=C:\\Pablo\\community\\CONSOLE.PointOfSale\\KebPOS\\Kebab.db;");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

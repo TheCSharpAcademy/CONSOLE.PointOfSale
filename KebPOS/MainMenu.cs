@@ -155,7 +155,8 @@ public class MainMenu
         Order order = new();
         try
         {
-            order = orders[index - 1];
+            index = orders[index].Id;
+            order = orders[index];
         }
         catch (ArgumentOutOfRangeException)
         {

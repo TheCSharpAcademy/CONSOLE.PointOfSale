@@ -30,7 +30,7 @@ public class MainMenu
                     AddNewOrder();
                     break;
                 case "2":
-                    ViewOrders();
+                    ViewOrders(_kebabController.GetOrders());
                     break;
                 case "3":
                     ViewOrderDetails();
@@ -132,9 +132,8 @@ public class MainMenu
         }
     }
 
-    private void ViewOrders()
+    private void ViewOrders(List<Order> orders)
     {
-        List<Order> orders = _kebabController.GetOrders();
         string output = $"+----- Current Orders ({orders.Count}) -----+\n";
         foreach (var order in orders)
         {
@@ -147,7 +146,7 @@ public class MainMenu
     {
         List<Order> orders = _kebabController.GetOrders();
 
-        ViewOrders();
+        ViewOrders(orders);
 
         Console.Write("\nSelect an order by its index to view the order details: ");
         var indexString = _userInput.GetId();

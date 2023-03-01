@@ -18,12 +18,6 @@ public class KebabController
         return db.Orders.OrderBy(x => x.OrderDate).Include(o => o.OrderProducts).ThenInclude(p => p.Product).ToList();
     }
 
-    public Order GetOrder(int id) 
-    {
-        using var db = new KebabContext();
-        return db.Orders.Include(o => o.OrderProducts).ThenInclude(p => p.Product).FirstOrDefault(o => o.Id == id);
-    }
-
     public void AddOrders(List<OrderProduct> orderProductsList)
     {
         using var db = new KebabContext();

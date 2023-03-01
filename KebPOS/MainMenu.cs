@@ -53,7 +53,7 @@ public class MainMenu
         {
             var products = _kebabController.GetProducts();
 
-            DisplayProducts(products);
+            UI.DisplayProducts(products);
 
             var id = GetSelectedProduct(products);
 

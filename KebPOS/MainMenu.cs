@@ -44,7 +44,7 @@ public class MainMenu
 
     private void AddNewOrder()
     {
-        List<int> productIds = new List<int>();
+        Dictionary<int, int> productQuantityPairs = new();
 
         decimal totalPrice = 0;
 
@@ -56,10 +56,18 @@ public class MainMenu
             DisplayProducts(products);
 
             var id = GetSelectedProduct(products);
+            var quantity = GetProductQuantity();
 
-            totalPrice += GetPrice(id, products);
-
-            productIds.Add(id);
+            if (productQuantityPairs.ContainsKey(id))
+            {
+                productQuantityPairs[id] += quantity;
+                totalPrice += (GetPrice(id, products) * quantity);
+            }
+            else
+            {
+                productQuantityPairs[id] = quantity;
+                totalPrice += (GetPrice(id, products) * quantity);
+            }
 
             Console.Write("Do you want to add another product to your order? yes/no: ");
             answer = _userInput.GetValidAnswer();
@@ -67,9 +75,17 @@ public class MainMenu
 
         var order = CreateNewOrder(totalPrice);
 
-        var orderProductsList = GetOrderProductList(productIds, order);
+        var orderProductsList = GetOrderProductList(productQuantityPairs, order);
 
         _kebabController.AddOrders(orderProductsList);
+    }
+
+    private int GetProductQuantity()
+    {
+        Console.Write("How many do you want to add to your order?: ");
+        var quantity = _userInput.GetQuantity();
+
+        return quantity;
     }
 
     private Order CreateNewOrder(decimal totalPrice)
@@ -81,16 +97,17 @@ public class MainMenu
         };
     }
 
-    private List<OrderProduct> GetOrderProductList(List<int> productIds, Order order)
+    private List<OrderProduct> GetOrderProductList(Dictionary<int, int> productQuantityPairs, Order order)
     {
         List<OrderProduct> orderProductsList = new();
 
-        foreach (var productId in productIds)
+        foreach (var productId in productQuantityPairs.Keys)
         {
             var orderProduct = new OrderProduct
             {
                 ProductId = productId,
-                Order = order
+                Order = order,
+                Quantity = productQuantityPairs[productId]
             };
 
             orderProductsList.Add(orderProduct);
@@ -155,8 +172,8 @@ public class MainMenu
         Order order = new();
         try
         {
-            index = orders[index].Id;
-            order = orders[index];
+            index = orders[index-1].Id;
+            order = orders.FirstOrDefault(x => x.Id == index);
         }
         catch (ArgumentOutOfRangeException)
         {

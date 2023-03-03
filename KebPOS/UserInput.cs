@@ -23,4 +23,15 @@ public class UserInput
 
         return answer;
     }
+
+    public int GetQuantity()
+    {
+        var input = Console.ReadLine();
+        while (!Validation.IsValidIdInput(input))
+        {
+            input = Console.ReadLine();
+        }
+
+        return int.Parse(input);
+    }
 }

@@ -6,6 +6,8 @@ public class MainMenu
 {
     private readonly KebabController _kebabController = new();
     private readonly UserInput _userInput = new();
+    private readonly UserInterface _userInterface = new();
+
     internal void InitializeMenu()
     {
         bool closeMenu = false;
@@ -53,7 +55,7 @@ public class MainMenu
         {
             var products = _kebabController.GetProducts();
 
-            DisplayProducts(products);
+            _userInterface.DisplayProducts(products);
 
             var id = GetSelectedProduct(products);
             var quantity = GetProductQuantity();
@@ -141,13 +143,13 @@ public class MainMenu
         return id;
     }
 
-    private void DisplayProducts(List<Product> products)
-    {
-        foreach (var product in products)
-        {
-            Console.WriteLine($"{product.Id}\n{product.Name}\n{product.Description}\n{product.Price}\n\n");
-        }
-    }
+    // private void DisplayProducts(List<Product> products)
+    // {
+    //     foreach (var product in products)
+    //     {
+    //         Console.WriteLine($"{product.Id}\n{product.Name}\n{product.Description}\n{product.Price}\n\n");
+    //     }
+    // }
 
     private void ViewOrders(List<Order> orders)
     {
@@ -172,7 +174,7 @@ public class MainMenu
         Order order = new();
         try
         {
-            index = orders[index-1].Id;
+            index = orders[index - 1].Id;
             order = orders.FirstOrDefault(x => x.Id == index);
         }
         catch (ArgumentOutOfRangeException)

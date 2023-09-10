@@ -1,4 +1,5 @@
 using KebPOS.Models;
+using KebPOS.Models.Dtos;
 using Spectre.Console;
 
 namespace KebPOS;
@@ -55,7 +56,9 @@ public class MainMenu
         {
             var products = _kebabController.GetProducts();
 
-            _userInterface.DisplayProducts(products);
+            var productDtoList = MapProductListToProductDtoList(products);
+
+            _userInterface.DisplayProducts(productDtoList);
 
             var id = GetSelectedProduct(products);
             var quantity = GetProductQuantity();
@@ -197,5 +200,27 @@ public class MainMenu
         {
             ViewOrderDetails();
         }
+    }
+
+    private ProductDto MapProductToProductDto(Product product)
+    {
+        return new ProductDto
+        {
+            Id = product.Id,
+            Name = product.Name,
+            Price = product.Price
+        };
+    }
+
+    private List<ProductDto> MapProductListToProductDtoList(List<Product> productList)
+    {
+        var productDtoList = new List<ProductDto>();
+
+        foreach(var product in productList)
+        {
+            productDtoList.Add(MapProductToProductDto(product));
+        }
+
+        return productDtoList;
     }
 }

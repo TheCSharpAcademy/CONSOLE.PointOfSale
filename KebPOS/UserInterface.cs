@@ -1,11 +1,11 @@
-using KebPOS.Models;
+using KebPOS.Models.Dtos;
 using Spectre.Console;
 
 namespace KebPOS;
 
 public class UserInterface
 {
-    public void DisplayProducts(List<Product> products)
+    public void DisplayProducts(List<ProductDto> products)
     {
         var productTable = new Table().Centered();
 
@@ -16,11 +16,8 @@ public class UserInterface
         productTable.AddColumns(
             new TableColumn($"[{blue}]Id[/]"),
             new TableColumn($"[{blue}]Name[/]"),
-            new TableColumn($"[{blue}]Price[/]"),
-            new TableColumn($"[{blue}]Description[/]")
+            new TableColumn($"[{blue}]Price[/]")
         );
-
-        var tabSpace = "    ";
 
         foreach (var product in products)
         {
@@ -28,8 +25,7 @@ public class UserInterface
             {
                 new (product.Id.ToString()),
                 new ($"[{yellow}]{product.Name}[/]"),
-                new ($"[{red}]{product.Price.ToString()}[/]"),
-                new (product.Description.Replace(tabSpace, ""))
+                new ($"[{red}]{product.Price}[/]")
             });
 
             productTable.AddEmptyRow();

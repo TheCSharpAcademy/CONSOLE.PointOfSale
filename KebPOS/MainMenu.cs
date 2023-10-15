@@ -1,4 +1,5 @@
 using KebPOS.Models;
+using Spectre.Console;
 
 namespace KebPOS;
 
@@ -50,7 +51,6 @@ public class MainMenu
 
         decimal totalPrice = 0;
 
-        string answer;
         do
         {
             var products = _kebabController.GetProducts();
@@ -70,10 +70,7 @@ public class MainMenu
                 productQuantityPairs[id] = quantity;
                 totalPrice += (GetPrice(id, products) * quantity);
             }
-
-            Console.Write("Do you want to add another product to your order? yes/no: ");
-            answer = _userInput.GetValidAnswer();
-        } while (answer != "n" && answer != "no");
+        } while (AnsiConsole.Confirm("Do you want to add another product to your order?"));
 
         var order = CreateNewOrder(totalPrice);
 

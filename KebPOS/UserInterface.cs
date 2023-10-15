@@ -38,4 +38,34 @@ public class UserInterface
 
         AnsiConsole.Write(productTable);
     }
+
+    public void DisplayOrders(List<Order> orders)
+    {
+        var orderTable = new Table().Centered();
+
+        var blue = "blue";
+        var yellow = "yellow";
+        var red = "red";
+
+        orderTable.AddColumns(
+            new TableColumn($"[{blue}]Id[/]"),
+            new TableColumn($"[{blue}]Order Date[/]"),
+            new TableColumn($"[{blue}]Total Price[/]")
+        );
+
+        foreach (var order in orders)
+        {
+            orderTable.AddRow(new List<Markup>
+            {
+                new ($"#{orders.IndexOf(order) + 1}"),
+                new ($"[{yellow}]{order.OrderDate}[/]"),
+                new ($"[{red}]{order.TotalPrice}[/]")
+            });
+
+            orderTable.AddEmptyRow();
+            orderTable.AddEmptyRow();
+        }
+
+        AnsiConsole.Write(orderTable);
+    }
 }

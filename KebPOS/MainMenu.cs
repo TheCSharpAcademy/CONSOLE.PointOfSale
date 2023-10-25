@@ -146,22 +146,9 @@ public class MainMenu
         return id;
     }
 
-    // private void DisplayProducts(List<Product> products)
-    // {
-    //     foreach (var product in products)
-    //     {
-    //         Console.WriteLine($"{product.Id}\n{product.Name}\n{product.Description}\n{product.Price}\n\n");
-    //     }
-    // }
-
     private void ViewOrders(List<Order> orders)
     {
-        string output = $"+----- Current Orders ({orders.Count}) -----+\n";
-        foreach (var order in orders)
-        {
-            output += $"[#{orders.IndexOf(order) + 1}] {order.OrderDate} - ${order.TotalPrice}\n";
-        }
-        Console.WriteLine(output);
+        _userInterface.DisplayOrders(orders);
     }
 
     private void ViewOrderDetails()

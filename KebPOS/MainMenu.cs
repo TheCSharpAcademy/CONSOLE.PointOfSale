@@ -16,31 +16,29 @@ public class MainMenu
 
         while (closeMenu == false)
         {
-            Console.WriteLine("\nWelcome to KebPOS");
-            Console.WriteLine("\nWhat would you like to do?");
-            Console.WriteLine("Type 1 to add new order");
-            Console.WriteLine("Type 2 to view orders");
-            Console.WriteLine("Type 3 to view order details");
-            Console.WriteLine("\nType 0 to Close Application.");
+          var selection = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+           .Title("Welcome to [green]KebPOS[/]\nWhat would you like to do?")
+           .PageSize(10)
+           .MoreChoicesText("")
+           .AddChoices(new[] {
+            "New order", "View orders", "View order details",
+            "Close Application",
+        }));
 
-            string userInput = Console.ReadLine();
-
-            switch (userInput)
+            switch (selection)
             {
-                case "0":
+                case "Close Application":
                     closeMenu = true;
                     break;
-                case "1":
+                case "New order":
                     AddNewOrder();
                     break;
-                case "2":
+                case "View orders":
                     ViewOrders(_kebabController.GetOrders());
                     break;
-                case "3":
+                case "View order details":
                     ViewOrderDetails();
-                    break;
-                default:
-                    Console.WriteLine("\nInvalid Command. Please type a number from 1 - 3.\n");
                     break;
             }
         }

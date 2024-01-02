@@ -1,12 +1,11 @@
-﻿using System;
-
-namespace KebPOS.Models;
-    internal static class Enums
+﻿namespace KebPOS.Models;
+internal static class Enums
+{
+    public enum MainMenuSelections
     {
-        public enum MainMenuSelections {
-            NewOrder,
-            ViewOrders,
-            ViewOrderDetails,
-            CloseApplication
-        }
+        NewOrder,
+        ViewOrders,
+        ViewOrderDetails,
+        CloseApplication
     }
+}

@@ -1,5 +1,6 @@
 using KebPOS.Models;
 using KebPOS.Models.Dtos;
+using Microsoft.EntityFrameworkCore.Storage;
 using Spectre.Console;
 using static KebPOS.Models.Enums;
 
@@ -174,15 +175,20 @@ public class MainMenu
             ViewOrderDetails();
         }
 
-        string output = $"\n+----- Viewing Order -----+\n";
-        output += $"[#{index}] {order.OrderDate} - ${order.TotalPrice}\n";
+        var orderDetails = $"[Orange3]Id: #{index}[/]  [Gold3]Date: {order.OrderDate}[/]\n";
+        orderDetails += $@"[Mediumpurple2]Orders
+---------------[/]";
         foreach (var item in order.OrderProducts)
         {
-            output += $"\t{item.Product.Name} - ${item.Product.Price}\n";
+            orderDetails += string.Format("\n[mediumorchid1]{0} - ${1}\n[/] ",item.Product.Name.PadRight(15),item.Product.Price);
         }
-
-        Console.WriteLine(output);
-
+        orderDetails += string.Format("\n[aquamarine1_1]{0}{1:c}[/]", "Total price:".PadRight(18), order.TotalPrice);
+        var panel = new Panel(orderDetails);
+        panel.Header=new PanelHeader("[Green]Order Details[/]");
+        panel.Border = BoxBorder.Rounded;
+        panel.Padding=new Padding(2,2,2,2);
+        AnsiConsole.Write(panel);
+      
         Console.Write("Do you want to view another orders, order details? yes/no: ");
         string answer = _userInput.GetValidAnswer();
 

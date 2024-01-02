@@ -1,6 +1,7 @@
 using KebPOS.Models;
 using KebPOS.Models.Dtos;
 using Spectre.Console;
+using static KebPOS.Models.Enums;
 
 namespace KebPOS;
 
@@ -16,28 +17,28 @@ public class MainMenu
 
         while (closeMenu == false)
         {
-          var selection = AnsiConsole.Prompt(
-            new SelectionPrompt<string>()
-           .Title("Welcome to [green]KebPOS[/]\nWhat would you like to do?")
-           .PageSize(10)
-           .MoreChoicesText("")
-           .AddChoices(new[] {
-            "New order", "View orders", "View order details",
-            "Close Application",
-        }));
+            var selection = AnsiConsole.Prompt(
+     new SelectionPrompt<MainMenuSelections>()
+    .Title("Welcome to [green]KebPOS[/]\nWhat would you like to do?")
+    .PageSize(10)
+    .MoreChoicesText("")
+    .AddChoices(MainMenuSelections.NewOrder,
+    MainMenuSelections.ViewOrders,
+    MainMenuSelections.ViewOrderDetails,
+    MainMenuSelections.CloseApplication));
 
             switch (selection)
             {
-                case "Close Application":
+                case MainMenuSelections.CloseApplication:
                     closeMenu = true;
                     break;
-                case "New order":
+                case MainMenuSelections.NewOrder:
                     AddNewOrder();
                     break;
-                case "View orders":
+                case MainMenuSelections.ViewOrders:
                     ViewOrders(_kebabController.GetOrders());
                     break;
-                case "View order details":
+                case MainMenuSelections.ViewOrderDetails:
                     ViewOrderDetails();
                     break;
             }

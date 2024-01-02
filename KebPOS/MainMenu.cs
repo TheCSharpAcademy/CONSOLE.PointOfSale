@@ -37,7 +37,7 @@ public class MainMenu
                     AddNewOrder();
                     break;
                 case MainMenuSelections.ViewOrders:
-                    ViewOrders(_kebabController.GetOrders());
+                    _userInterface.DisplayOrders(_kebabController.GetOrders());
                     break;
                 case MainMenuSelections.ViewOrderDetails:
                     ViewOrderDetails();
@@ -147,16 +147,9 @@ public class MainMenu
         return id;
     }
 
-    private void ViewOrders(List<Order> orders)
-    {
-        _userInterface.DisplayOrders(orders);
-    }
-
     private void ViewOrderDetails()
     {
-        List<Order> orders = _kebabController.GetOrders();
-
-        ViewOrders(orders);
+        _userInterface.DisplayOrders(_kebabController.GetOrders());
 
         Console.Write("\nSelect an order by its index to view the order details: ");
         var indexString = _userInput.GetId();
@@ -180,7 +173,7 @@ public class MainMenu
 ---------------[/]";
         foreach (var item in order.OrderProducts)
         {
-            orderDetails += string.Format("\n[mediumorchid1]{0} - ${1}\n[/] ",item.Product.Name.PadRight(15),item.Product.Price);
+            orderDetails += string.Format("\n[mediumorchid1]{0} - ${1}\n[/] ",item.Product.Name.PadRight(15),item.Product.Price, item.Quantity);
         }
         orderDetails += string.Format("\n[aquamarine1_1]{0}{1:c}[/]", "Total price:".PadRight(18), order.TotalPrice);
         var panel = new Panel(orderDetails);

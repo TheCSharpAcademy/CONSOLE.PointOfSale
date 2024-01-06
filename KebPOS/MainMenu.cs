@@ -1,6 +1,5 @@
 using KebPOS.Models;
 using KebPOS.Models.Dtos;
-using Microsoft.EntityFrameworkCore.Storage;
 using Spectre.Console;
 using static KebPOS.Models.Enums;
 
@@ -26,6 +25,7 @@ public class MainMenu
     .AddChoices(MainMenuSelections.NewOrder,
     MainMenuSelections.ViewOrders,
     MainMenuSelections.ViewOrderDetails,
+    MainMenuSelections.DeleteOrder,
     MainMenuSelections.CloseApplication));
 
             switch (selection)
@@ -42,10 +42,39 @@ public class MainMenu
                 case MainMenuSelections.ViewOrderDetails:
                     ViewOrderDetails();
                     break;
+                case MainMenuSelections.DeleteOrder:
+                    DeleteOrder();
+                    break;
             }
         }
     }
 
+    private void DeleteOrder()  // Burayý kodluyorsun
+    {
+        ViewOrders(_kebabController.GetOrders());
+        bool validId = false;
+        var allOrders = _kebabController.GetOrders();
+        int selectedOrderId = 0;
+
+        do
+        {
+            selectedOrderId = AnsiConsole.Ask<int>("Enter the Id of order to be deleted.");
+            validId = Validation.IsValidOrderId(selectedOrderId, allOrders);
+            if (!validId)
+                Console.WriteLine("Please enter a valid Id");
+
+        } while (!validId);
+
+        var areYouSure = AnsiConsole.Confirm($"[Red] This will delete the order[/] [yellow]#{selectedOrderId}[/][red] Are you SURE?[/]", false);
+        if (!areYouSure)
+        {
+            Console.Clear();
+            return;
+        }
+
+        var toBeDeleted = allOrders[selectedOrderId - 1];
+        _kebabController.RemoveOrder(toBeDeleted);
+    }
     private void AddNewOrder()
     {
         Dictionary<int, int> productQuantityPairs = new();

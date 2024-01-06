@@ -6,6 +6,7 @@ internal static class Enums
         NewOrder,
         ViewOrders,
         ViewOrderDetails,
+        DeleteOrder,
         CloseApplication
     }
 }

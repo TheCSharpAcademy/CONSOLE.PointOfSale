@@ -9,20 +9,20 @@ namespace KebPOS.Services
             var products = new List<Product>()
             {
                 new Product()
-                { 
-                    Id = 1, 
-                    Name = "Yogurt Kebab", 
+                {
+                    Id = 1,
+                    Name = "Yogurt Kebab",
                     Description = """
                         The other name of this yummy Kebab is “good for you Kebab” the Kebab is made up of paneer, raisins, oats and creamy yogurt. 
                         This Kebab is a total combination of health and taste. The addition of extraordinary paneer simply enhances the taste of the Kebab. 
                         You can add other veggies also.
-                    """, 
+                    """,
                     Price = 3.49m
                 },
                 new Product()
-                { 
-                    Id = 2, 
-                    Name = "Shish Kebab", 
+                {
+                    Id = 2,
+                    Name = "Shish Kebab",
                     Description = """
                         This Kebab is one among all the most popular and delicious Kebabs. 
                         The special part of this Kebab is that they are grilled on the skewer. 
@@ -32,13 +32,13 @@ namespace KebPOS.Services
                         Just imagine the taste of Turkish dish with an Indian tadka. 
                         These are most popular of all Kebabs. 
                         Steamed vegetables and salads are served along with these Kebabs.
-                    """, 
+                    """,
                     Price = 4.19m
                 },
                 new Product()
-                { 
-                    Id = 3, 
-                    Name = "Doner Kebab", 
+                {
+                    Id = 3,
+                    Name = "Doner Kebab",
                     Description = """
                         Another name of this Kebab is rotating Kebab. 
                         And this wonderful name is given to this Kebab because it is made on a vertical rotating spit. 
@@ -46,13 +46,13 @@ namespace KebPOS.Services
                         The Kebab is made of lamb’s meat. 
                         The special taste of Kebab is due to its cooking style. 
                         The Kebabs are cooked slowly so that the meat juice could spread its flavor.
-                        """, 
+                        """,
                     Price = 3.39m
                 },
                 new Product()
-                { 
-                    Id = 4, 
-                    Name = "Kathi Kebab", 
+                {
+                    Id = 4,
+                    Name = "Kathi Kebab",
                     Description = """
                         Kathi Kebabs are very famous as they are made using tandoor. 
                         This is the most popular Indian dish made using tandoor. 
@@ -60,25 +60,25 @@ namespace KebPOS.Services
                         This Kebab is a very wonderful snack to have. 
                         The best way of having these yummy Kathi Kebabs is by rolling them in Kathi roll. 
                         You can add lots and lots of chutney on the roll so that the taste of Kebabs enhances your mood also.
-                    """, 
+                    """,
                     Price = 3.37m
                 },
                 new Product()
-                { 
-                    Id = 5, 
-                    Name = "Chapli Kebab", 
+                {
+                    Id = 5,
+                    Name = "Chapli Kebab",
                     Description = """
                         Chapli Kebabs are a very famous dish of Pakistani cuisine. 
                         This minced meat has a special taste. 
                         The Kebab is made using beef. 
                         This Pakistani dish with an Indian special tadka is all you need to have.
-                    """, 
+                    """,
                     Price = 4.33m
                 },
                 new Product()
-                { 
-                    Id = 6, 
-                    Name = "Burrah Kebab", 
+                {
+                    Id = 6,
+                    Name = "Burrah Kebab",
                     Description = """
                         Burrah Kebabs are also known as barrah Kebab. 
                         The Kebab is made up of beef and lots and lots of spices. 
@@ -86,13 +86,13 @@ namespace KebPOS.Services
                         This dish comes under the heavy meal category. 
                         It majorly includes larger pieces of meat. 
                         If you are also among the Mughlai cuisine lovers, then you can’t afford to miss such an amazing dish.
-                    """, 
+                    """,
                     Price = 4.36m
                 },
                 new Product()
-                { 
-                    Id = 7, 
-                    Name = "Chelow Kebab", 
+                {
+                    Id = 7,
+                    Name = "Chelow Kebab",
                     Description = """
                         This is an Irani dish with an Indian tadka. 
                         This is, in fact, national food of Iran. 
@@ -100,13 +100,13 @@ namespace KebPOS.Services
                         They are always served with buttered rice. 
                         Most of the people prefer doogh which is a yogurt drink with this Kebab. 
                         The dish comes under the category of the side dish, but the taste of the dish is very special.
-                    """, 
+                    """,
                     Price = 4.29m
                 },
                 new Product()
-                { 
-                    Id = 8, 
-                    Name = "Testi Kebab", 
+                {
+                    Id = 8,
+                    Name = "Testi Kebab",
                     Description = """
                         The name of the Kebab is testi Kebab, and here the word testi means jug. 
                         Yes, the Kebab is served in a pot. 
@@ -114,35 +114,35 @@ namespace KebPOS.Services
                         The pot is broken while eating. 
                         We all know how special the taste of “matke ka pani” is. 
                         Similarly, the taste of matka Kebab is very special.
-                    """, 
+                    """,
                     Price = 3.69m
                 },
                 new Product()
-                { 
-                    Id = 9, 
-                    Name = "Dill Salmon Kebab", 
+                {
+                    Id = 9,
+                    Name = "Dill Salmon Kebab",
                     Description = """
                         Dill salmon Kebab is very special Kebab for all seafood lovers and especially for fish lovers. 
                         The dish is very yummy.
-                    """, 
+                    """,
                     Price = 3.99m
                 },
                 new Product()
-                { 
-                    Id = 10, 
-                    Name = "Lamb Kebab", 
+                {
+                    Id = 10,
+                    Name = "Lamb Kebab",
                     Description = """
                         Lamb Kebabs are very easy to make. 
                         What all you need to do is marinate the mince meat with all the spices. 
                         You can add egg also just to enhance the taste of Kebab.
-                    """, 
+                    """,
                     Price = 3.79m
                 },
                 new Product()
-                { 
-                    Id = 11, 
-                    Name = "Cappuccino", 
-                    Description = "A freshly pulled shot of espresso layered with steamed whole milk and thick rich foam to offer a luxurious velvety texture and complex aroma.", 
+                {
+                    Id = 11,
+                    Name = "Cappuccino",
+                    Description = "A freshly pulled shot of espresso layered with steamed whole milk and thick rich foam to offer a luxurious velvety texture and complex aroma.",
                     Price = 1.49m
                 },
                 new Product()
@@ -167,7 +167,7 @@ namespace KebPOS.Services
                     Price = 1.99m
                 },
                 new Product()
-                { 
+                {
                     Id = 15,
                     Name = "Bonaqua Sparkling",
                     Description = "BonAqua is a high-quality drinking water.",

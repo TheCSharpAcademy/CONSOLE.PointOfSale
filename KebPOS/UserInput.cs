@@ -2,7 +2,7 @@ namespace KebPOS;
 
 public class UserInput
 {
-    public string GetId()
+    public int GetId()
     {
         var id = Console.ReadLine();
         while (!Validation.IsValidIdInput(id))
@@ -10,7 +10,7 @@ public class UserInput
             id = Console.ReadLine();
         }
 
-        return id;
+        return int.Parse(id);
     }
 
     public string GetValidAnswer()

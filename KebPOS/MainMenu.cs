@@ -128,16 +128,13 @@ public class MainMenu
     private int GetSelectedProduct(List<Product> products)
     {
         Console.Write("Select a product by Id to add to cart: ");
-        var choice = _userInput.GetId();
+        var id = _userInput.GetId();
 
-        var id = int.Parse(choice);
 
         while (!products.Exists(p => p.Id == id))
         {
             Console.Write("Select a product by Id to add to cart: ");
-            choice = _userInput.GetId();
-
-            id = int.Parse(choice);
+            id = _userInput.GetId();
         }
 
         return id;
@@ -155,8 +152,7 @@ public class MainMenu
         ViewOrders(orders);
 
         Console.Write("\nSelect an order by its index to view the order details: ");
-        var indexString = _userInput.GetId();
-        int index = int.Parse(indexString);
+        var index = _userInput.GetId();
 
         Order order = new();
         try

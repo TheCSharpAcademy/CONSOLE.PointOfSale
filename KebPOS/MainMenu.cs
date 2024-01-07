@@ -49,7 +49,7 @@ public class MainMenu
         }
     }
 
-    private void DeleteOrder()  // Burayý kodluyorsun
+    private void DeleteOrder()  // Burayï¿½ kodluyorsun
     {
         ViewOrders(_kebabController.GetOrders());
         bool validId = false;

@@ -61,17 +61,29 @@ public class MainMenu
             _userInterface.DisplayProducts(productDtoList);
 
             var id = GetSelectedProduct(products);
+            if (id == -1) // user canceled
+            {
+                Console.Clear();
+                break;
+            }
+
             var quantity = GetProductQuantity();
+
+            if (quantity == -1) // user canceled
+            {
+                Console.Clear();
+                break;
+            }
 
             if (productQuantityPairs.ContainsKey(id))
             {
                 productQuantityPairs[id] += quantity;
-                totalPrice += (GetPrice(id, products) * quantity);
+                totalPrice += GetPrice(id, products) * quantity;
             }
             else
             {
                 productQuantityPairs[id] = quantity;
-                totalPrice += (GetPrice(id, products) * quantity);
+                totalPrice += GetPrice(id, products) * quantity;
             }
         } while (AnsiConsole.Confirm("Do you want to add another product to your order?"));
 
@@ -84,7 +96,7 @@ public class MainMenu
 
     private int GetProductQuantity()
     {
-        Console.Write("How many do you want to add to your order?: ");
+        Console.Write("How many do you want to add to your order? ('back' to cancel): ");
         var quantity = _userInput.GetQuantity();
 
         return quantity;
@@ -127,14 +139,22 @@ public class MainMenu
 
     private int GetSelectedProduct(List<Product> products)
     {
-        Console.Write("Select a product by Id to add to cart: ");
+        Console.Write("Select a product by Id to add to cart ('back' to cancel): ");
         var id = _userInput.GetId();
 
+        if (id == -1) // user canceled
+        {
+            return -1;
+        }
 
         while (!products.Exists(p => p.Id == id))
         {
-            Console.Write("Select a product by Id to add to cart: ");
+            Console.Write("Select a product by Id to add to cart ('back' to cancel): ");
             id = _userInput.GetId();
+            if (id == -1) // user canceled
+            {
+                return -1;
+            }
         }
 
         return id;

@@ -14,7 +14,7 @@ public class ShoppingService
             Console.WriteLine(product.Price);
         }
     }
-    
+
     public void GetOrders()
     {
         var kebabController = new KebabController();

@@ -26,4 +26,11 @@ public class KebabController
 
         db.SaveChanges();
     }
+
+    public void RemoveOrder(Order toBeRemoved)  // Burayi kodladın takip et
+    {
+        using var db = new KebabContext();
+        db.Orders.Remove(toBeRemoved);
+        db.SaveChanges();
+    }
 }

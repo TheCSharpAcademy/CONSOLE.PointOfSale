@@ -1,3 +1,4 @@
+using KebPOS.Models;
 using KebPOS.Models.Dtos;
 using Spectre.Console;
 
@@ -63,5 +64,22 @@ public class UserInterface
         }
 
         AnsiConsole.Write(orderTable);
+    }
+
+    public void DisplayOrderDetails(Order order)
+    {
+        var orderDetails = $"[Orange3]Id: #{order.Id}[/]  [Gold3]Date: {order.OrderDate}[/]\n";
+        orderDetails += $@"[Mediumpurple2]Orders
+---------------[/]";
+        foreach (var item in order.OrderProducts)
+        {
+            orderDetails += string.Format("\n[mediumorchid1]{0}x - {1} - ${2}\n[/] ", item.Quantity, item.Product.Name.PadRight(15), item.Product.Price);
+        }
+        orderDetails += string.Format("\n[aquamarine1_1]{0}{1:c}[/]", "Total price:".PadRight(18), order.TotalPrice);
+        var panel = new Panel(orderDetails);
+        panel.Header = new PanelHeader("[Green]Order Details[/]");
+        panel.Border = BoxBorder.Rounded;
+        panel.Padding = new Padding(2, 2, 2, 2);
+        AnsiConsole.Write(panel);
     }
 }

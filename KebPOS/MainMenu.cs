@@ -1,5 +1,7 @@
 using KebPOS.Models;
 using KebPOS.Models.Dtos;
+using Spectre.Console;
+using static KebPOS.Models.Enums;
 
 namespace KebPOS;
 
@@ -15,36 +17,64 @@ public class MainMenu
 
         while (closeMenu == false)
         {
-            Console.WriteLine("\nWelcome to KebPOS");
-            Console.WriteLine("\nWhat would you like to do?");
-            Console.WriteLine("Type 1 to add new order");
-            Console.WriteLine("Type 2 to view orders");
-            Console.WriteLine("Type 3 to view order details");
-            Console.WriteLine("\nType 0 to Close Application.");
+            var selection = AnsiConsole.Prompt(
+     new SelectionPrompt<MainMenuSelections>()
+    .Title("Welcome to [green]KebPOS[/]\nWhat would you like to do?")
+    .PageSize(10)
+    .MoreChoicesText("")
+    .AddChoices(MainMenuSelections.NewOrder,
+    MainMenuSelections.ViewOrders,
+    MainMenuSelections.ViewOrderDetails,
+    MainMenuSelections.DeleteOrder,
+    MainMenuSelections.CloseApplication));
 
-            string userInput = Console.ReadLine();
-
-            switch (userInput)
+            switch (selection)
             {
-                case "0":
+                case MainMenuSelections.CloseApplication:
                     closeMenu = true;
                     break;
-                case "1":
+                case MainMenuSelections.NewOrder:
                     AddNewOrder();
                     break;
-                case "2":
+                case MainMenuSelections.ViewOrders:
                     ViewOrders(_kebabController.GetOrders());
                     break;
-                case "3":
+                case MainMenuSelections.ViewOrderDetails:
                     ViewOrderDetails();
                     break;
-                default:
-                    Console.WriteLine("\nInvalid Command. Please type a number from 1 - 3.\n");
+                case MainMenuSelections.DeleteOrder:
+                    DeleteOrder();
                     break;
             }
         }
     }
 
+    private void DeleteOrder()  // Burayý kodluyorsun
+    {
+        ViewOrders(_kebabController.GetOrders());
+        bool validId = false;
+        var allOrders = _kebabController.GetOrders();
+        int selectedOrderId = 0;
+
+        do
+        {
+            selectedOrderId = AnsiConsole.Ask<int>("Enter the Id of order to be deleted.");
+            validId = Validation.IsValidOrderId(selectedOrderId, allOrders);
+            if (!validId)
+                Console.WriteLine("Please enter a valid Id");
+
+        } while (!validId);
+
+        var areYouSure = AnsiConsole.Confirm($"[Red] This will delete the order[/] [yellow]#{selectedOrderId}[/][red] Are you SURE?[/]", false);
+        if (!areYouSure)
+        {
+            Console.Clear();
+            return;
+        }
+
+        var toBeDeleted = allOrders[selectedOrderId - 1];
+        _kebabController.RemoveOrder(toBeDeleted);
+    }
     private void AddNewOrder()
     {
         Dictionary<int, int> productQuantityPairs = new();
@@ -66,12 +96,12 @@ public class MainMenu
             if (productQuantityPairs.ContainsKey(id))
             {
                 productQuantityPairs[id] += quantity;
-                totalPrice += (GetPrice(id, products) * quantity);
+                totalPrice += GetPrice(id, products) * quantity;
             }
             else
             {
                 productQuantityPairs[id] = quantity;
-                totalPrice += (GetPrice(id, products) * quantity);
+                totalPrice += GetPrice(id, products) * quantity;
             }
 
             Console.Write("Do you want to add another product to your order? yes/no: ");
@@ -174,14 +204,7 @@ public class MainMenu
             ViewOrderDetails();
         }
 
-        string output = $"\n+----- Viewing Order -----+\n";
-        output += $"[#{index}] {order.OrderDate} - ${order.TotalPrice}\n";
-        foreach (var item in order.OrderProducts)
-        {
-            output += $"\t{item.Product.Name} - ${item.Product.Price}\n";
-        }
-
-        Console.WriteLine(output);
+        _userInterface.DisplayOrderDetails(order);
 
         Console.Write("Do you want to view another orders, order details? yes/no: ");
         string answer = _userInput.GetValidAnswer();
@@ -206,7 +229,7 @@ public class MainMenu
     {
         var productDtoList = new List<ProductDto>();
 
-        foreach(var product in productList)
+        foreach (var product in productList)
         {
             productDtoList.Add(MapProductToProductDto(product));
         }

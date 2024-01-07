@@ -1,7 +1,8 @@
 {
   "profiles": {
     "KebPOS": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\sipah\\Desktop\\serdar\\projeler\\PointOfSale\\CONSOLE.PointOfSale\\KebPOS"
     }
   }
 }

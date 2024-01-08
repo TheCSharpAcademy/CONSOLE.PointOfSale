@@ -1,4 +1,4 @@
 ﻿using KebPOS;
 
-MainMenu menu = new();
-menu.InitializeMenu();
+UserInterface _userinterface = new();
+_userinterface.InitializeMenu();

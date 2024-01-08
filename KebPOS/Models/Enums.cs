@@ -7,6 +7,17 @@ internal static class Enums
         ViewOrders,
         ViewOrderDetails,
         DeleteOrder,
+        ManageProducts,
         CloseApplication
+    }
+
+    public enum ManageProductsSelections
+    {
+        ViewProducts,
+        ViewProductDetails,
+        AddProduct,
+        UpdateProduct,
+        DeleteProduct,
+        ReturnToMainMenu
     }
 }

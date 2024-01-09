@@ -2,15 +2,24 @@ namespace KebPOS;
 
 public class UserInput
 {
-    public string GetId()
+    public int GetId()
     {
         var id = Console.ReadLine();
+        if (id == "back")
+        {
+            return -1;
+        }
+
         while (!Validation.IsValidIdInput(id))
         {
             id = Console.ReadLine();
+            if (id == "back")
+            {
+                return -1;
+            }
         }
 
-        return id;
+        return int.Parse(id);
     }
 
     public string GetValidAnswer()
@@ -27,9 +36,18 @@ public class UserInput
     public int GetQuantity()
     {
         var input = Console.ReadLine();
+        if (input == "back")
+        {
+            return -1;
+        }
+
         while (!Validation.IsValidIdInput(input))
         {
             input = Console.ReadLine();
+            if (input == "back")
+            {
+                return -1;
+            }
         }
 
         return int.Parse(input);

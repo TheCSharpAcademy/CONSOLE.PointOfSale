@@ -49,7 +49,7 @@ public class MainMenu
         }
     }
 
-    private void DeleteOrder()  // Buray� kodluyorsun
+    private void DeleteOrder()  // Burayï¿½ kodluyorsun
     {
         ViewOrders(_kebabController.GetOrders());
         bool validId = false;
@@ -81,7 +81,6 @@ public class MainMenu
 
         decimal totalPrice = 0;
 
-        string answer;
         do
         {
             var products = _kebabController.GetProducts();
@@ -91,7 +90,19 @@ public class MainMenu
             _userInterface.DisplayProducts(productDtoList);
 
             var id = GetSelectedProduct(products);
+            if (id == -1) // user canceled
+            {
+                Console.Clear();
+                break;
+            }
+
             var quantity = GetProductQuantity();
+
+            if (quantity == -1) // user canceled
+            {
+                Console.Clear();
+                break;
+            }
 
             if (productQuantityPairs.ContainsKey(id))
             {
@@ -103,10 +114,7 @@ public class MainMenu
                 productQuantityPairs[id] = quantity;
                 totalPrice += GetPrice(id, products) * quantity;
             }
-
-            Console.Write("Do you want to add another product to your order? yes/no: ");
-            answer = _userInput.GetValidAnswer();
-        } while (answer != "n" && answer != "no");
+        } while (AnsiConsole.Confirm("Do you want to add another product to your order?"));
 
         var order = CreateNewOrder(totalPrice);
 
@@ -117,7 +125,7 @@ public class MainMenu
 
     private int GetProductQuantity()
     {
-        Console.Write("How many do you want to add to your order?: ");
+        Console.Write("How many do you want to add to your order? ('back' to cancel): ");
         var quantity = _userInput.GetQuantity();
 
         return quantity;
@@ -160,17 +168,22 @@ public class MainMenu
 
     private int GetSelectedProduct(List<Product> products)
     {
-        Console.Write("Select a product by Id to add to cart: ");
-        var choice = _userInput.GetId();
+        Console.Write("Select a product by Id to add to cart ('back' to cancel): ");
+        var id = _userInput.GetId();
 
-        var id = int.Parse(choice);
+        if (id == -1) // user canceled
+        {
+            return -1;
+        }
 
         while (!products.Exists(p => p.Id == id))
         {
-            Console.Write("Select a product by Id to add to cart: ");
-            choice = _userInput.GetId();
-
-            id = int.Parse(choice);
+            Console.Write("Select a product by Id to add to cart ('back' to cancel): ");
+            id = _userInput.GetId();
+            if (id == -1) // user canceled
+            {
+                return -1;
+            }
         }
 
         return id;
@@ -188,8 +201,7 @@ public class MainMenu
         ViewOrders(orders);
 
         Console.Write("\nSelect an order by its index to view the order details: ");
-        var indexString = _userInput.GetId();
-        int index = int.Parse(indexString);
+        var index = _userInput.GetId();
 
         Order order = new();
         try

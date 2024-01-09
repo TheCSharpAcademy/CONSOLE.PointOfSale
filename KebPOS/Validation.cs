@@ -1,6 +1,4 @@
-﻿
-
-namespace KebPOS;
+﻿namespace KebPOS;
 public class Validation
 {
     public static bool IsValidIdInput(string input)

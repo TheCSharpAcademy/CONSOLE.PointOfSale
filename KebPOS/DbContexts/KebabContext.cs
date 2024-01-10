@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KebPOS.DbContexts;
 
-internal class KebabContext : DbContext
+public class KebabContext : DbContext
 {
     public DbSet<Order> Orders { get; set; }
     public DbSet<Product> Products { get; set; }

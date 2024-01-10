@@ -24,7 +24,6 @@ public class ProductService
                 Console.Clear();
                 Console.WriteLine($"ERROR: There is a product already named {product.Name}.  The product could not be entered.");
                 Console.ReadKey();
-                //in future iterations we could send the product to update product the product so they don't have to rewrite everything
             }
             else
             {

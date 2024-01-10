@@ -4,6 +4,9 @@ using KebPOS.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using System.Linq;
+using NUnit.Framework;
+using System;
+using System.IO;
 
 namespace KebPOSTests;
 
@@ -78,6 +81,7 @@ public class ValidationTest
 
     [Test]
     public void AddProduct_ShouldAddProductToDatabase()
+        //Database needs to be created for this test
     {
         // Arrange
         var product = new Product
@@ -98,4 +102,5 @@ public class ValidationTest
             Assert.AreEqual(product.Name, retrievedProduct.Name);
         }
     }
+
 }

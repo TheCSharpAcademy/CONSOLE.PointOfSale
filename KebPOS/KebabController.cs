@@ -6,6 +6,13 @@ namespace KebPOS;
 
 public class KebabController
 {
+     internal static void AddProduct(Product product)
+     {
+         using var db = new KebabContext();
+         db.Add(product);
+         db.SaveChanges();
+     }
+
     public List<Product> GetProducts()
     {
         using var db = new KebabContext();

@@ -32,6 +32,13 @@ internal class KebabContext : DbContext
             .HasForeignKey(op => op.ProductId);
 
         modelBuilder.Entity<Product>()
+            .HasKey(p => p.Id);
+
+        modelBuilder.Entity<Product>()
+            .HasIndex(p => p.Name)
+            .IsUnique();
+
+        modelBuilder.Entity<Product>()
             .HasData(ProductService.GetProducts());
     }
 }

@@ -1,5 +1,6 @@
 using KebPOS.Models;
 using KebPOS.Models.Dtos;
+using KebPOS.Services;
 using Spectre.Console;
 using static KebPOS.Models.Enums;
 
@@ -75,7 +76,7 @@ public class UserInterface
                 //add method
                 break;
             case ManageProductsSelections.AddProduct:
-                //add method
+                ProductService.InsertProduct();
                 break;
             case ManageProductsSelections.UpdateProduct:
                 //add method

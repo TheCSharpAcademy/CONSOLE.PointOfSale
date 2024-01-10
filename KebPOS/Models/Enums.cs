@@ -9,7 +9,8 @@ internal static class Enums
         ViewOrderDetails,
         DeleteOrder,
         ManageProducts,
-        CloseApplication
+        CloseApplication,
+        ViewReports
     }
 
     public enum ManageProductsSelections
@@ -19,6 +20,15 @@ internal static class Enums
         AddProduct,
         UpdateProduct,
         DeleteProduct,
+        ReturnToMainMenu
+    }
+
+    public enum ViewReportsSelections
+    {
+        SalesPerMonth,
+        SalesPerYear,
+        SalesPerDay,
+        SalesPerWeek,
         ReturnToMainMenu
     }
 }

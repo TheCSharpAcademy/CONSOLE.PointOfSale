@@ -1,5 +1,6 @@
 using KebPOS.Models;
 using KebPOS.Models.Dtos;
+using KebPOS.Services;
 using Spectre.Console;
 using static KebPOS.Models.Enums;
 
@@ -26,6 +27,7 @@ public class UserInterface
     MainMenuSelections.ViewOrderDetails,
     MainMenuSelections.DeleteOrder,
     MainMenuSelections.ManageProducts,
+    MainMenuSelections.ViewReports,
     MainMenuSelections.CloseApplication));
 
             switch (selection)
@@ -47,6 +49,9 @@ public class UserInterface
                     break;
                 case MainMenuSelections.ManageProducts:
                     ManageProductsMenu();
+                    break;
+                case MainMenuSelections.ViewReports:
+                    ManageReportsMenu();
                     break;
             }
         }
@@ -88,6 +93,39 @@ public class UserInterface
                 break;
         }
 
+    }
+
+    internal void ManageReportsMenu()
+    {
+        var selection = AnsiConsole.Prompt(
+        new SelectionPrompt<ViewReportsSelections>()
+        .Title("[Purple] Manage Reports Menu[/]\nWhich time period do you want to view sales for?")
+        .PageSize(5)
+        .MoreChoicesText("")
+        .AddChoices(ViewReportsSelections.SalesPerMonth,
+        ViewReportsSelections.SalesPerYear,
+        ViewReportsSelections.SalesPerDay,
+        ViewReportsSelections.SalesPerWeek,
+        ViewReportsSelections.ReturnToMainMenu));
+
+        switch(selection)
+        {
+            case ViewReportsSelections.SalesPerMonth:
+                ReportsService.GetSalesPerMonth();
+                break;
+            case ViewReportsSelections.SalesPerYear:
+                ReportsService.GetSalesPerYear();
+                break;
+            case ViewReportsSelections.SalesPerDay:
+                ReportsService.GetSalesPerDay();
+                break;
+            case ViewReportsSelections.SalesPerWeek:
+                ReportsService.GetSalesPerWeek();
+                break;
+            case ViewReportsSelections.ReturnToMainMenu:
+                InitializeMenu();
+                break;
+        }
     }
 
     private void DeleteOrder()  // Burayý kodluyorsun

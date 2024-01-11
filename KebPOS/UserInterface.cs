@@ -80,7 +80,7 @@ public class UserInterface
                 //add method
                 break;
             case ManageProductsSelections.AddProduct:
-                //add method
+                ProductService.InsertProduct();
                 break;
             case ManageProductsSelections.UpdateProduct:
                 //add method

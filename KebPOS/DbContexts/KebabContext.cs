@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KebPOS.DbContexts;
 
-internal class KebabContext : DbContext
+public class KebabContext : DbContext
 {
     public DbSet<Order> Orders { get; set; }
     public DbSet<Product> Products { get; set; }
@@ -30,6 +30,13 @@ internal class KebabContext : DbContext
             .HasOne(op => op.Product)
             .WithMany(p => p.OrderProducts)
             .HasForeignKey(op => op.ProductId);
+
+        modelBuilder.Entity<Product>()
+            .HasKey(p => p.Id);
+
+        modelBuilder.Entity<Product>()
+            .HasIndex(p => p.Name)
+            .IsUnique();
 
         modelBuilder.Entity<Product>()
             .HasData(ProductService.GetProducts());

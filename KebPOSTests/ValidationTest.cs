@@ -1,4 +1,12 @@
 using KebPOS;
+using KebPOS.Models;
+using KebPOS.DbContexts;
+using Microsoft.EntityFrameworkCore;
+using NUnit.Framework;
+using System.Linq;
+using NUnit.Framework;
+using System;
+using System.IO;
 
 namespace KebPOSTests;
 
@@ -70,4 +78,29 @@ public class ValidationTest
 
         Assert.IsFalse(result);
     }
+
+    [Test]
+    public void AddProduct_ShouldAddProductToDatabase()
+        //Database needs to be created for this test
+    {
+        // Arrange
+        var product = new Product
+        {
+            Name = "TestProduct",
+            Price = 10.99m,
+            Description = "Test Description"
+        };
+
+        // Act
+        KebabController.AddProduct(product);
+
+        // Assert
+        using (var context = new KebabContext())
+        {
+            var retrievedProduct = context.Products.Find(product.Id);
+            Assert.IsNotNull(retrievedProduct);
+            Assert.AreEqual(product.Name, retrievedProduct.Name);
+        }
+    }
+
 }

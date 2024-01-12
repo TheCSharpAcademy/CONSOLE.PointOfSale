@@ -31,4 +31,13 @@ internal static class Enums
         SalesPerWeek,
         ReturnToMainMenu
     }
+
+    public enum ProductProperties
+    {
+        Id,
+        Name,
+        Description,
+        Price,
+        PreviousMenu
+    }
 }

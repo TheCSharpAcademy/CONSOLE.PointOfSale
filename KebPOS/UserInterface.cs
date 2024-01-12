@@ -83,7 +83,7 @@ public class UserInterface
                 //add method
                 break;
             case ManageProductsSelections.UpdateProduct:
-                //add method
+                UpdateProduct();
                 break;
             case ManageProductsSelections.DeleteProduct:
                 //add method
@@ -108,7 +108,7 @@ public class UserInterface
         ViewReportsSelections.SalesPerWeek,
         ViewReportsSelections.ReturnToMainMenu));
 
-        switch(selection)
+        switch (selection)
         {
             case ViewReportsSelections.SalesPerMonth:
                 ReportsService.GetSalesPerMonth();
@@ -128,6 +128,53 @@ public class UserInterface
         }
     }
 
+    private void UpdateProduct()
+    {
+        var products = _kebabController.GetProducts();
+        var productsNameList=products.Select(x => x.Name).ToList();
+        var selectedProductName = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(productsNameList));
+        Product productToUpdate=products.Single(x=> x.Name==selectedProductName);
+        var propertyToUpdate = AnsiConsole.Prompt(new SelectionPrompt<ProductProperties>().AddChoices(
+                                                                                                    ProductProperties.Name,
+                                                                                                    ProductProperties.Description,
+                                                                                                    ProductProperties.Price,
+                                                                                                    ProductProperties.PreviousMenu));
+        switch(propertyToUpdate)
+        {
+            case ProductProperties.Name:
+                UpdateProductName(productToUpdate);
+                break;
+            case ProductProperties.Description:
+                UpdateProductDescription(productToUpdate);
+                break;
+            case ProductProperties.Price:
+                UpdateProductPrice(productToUpdate);
+                break;
+            case ProductProperties.PreviousMenu:
+                break;
+        }
+    }
+
+    private void UpdateProductName(Product productToUpdate)
+    {
+        AnsiConsole.Markup($"[Blue]Current name:[/] {productToUpdate.Name}\n\n");
+        string newName = AnsiConsole.Ask<string>("[Yellow]Enter new name:[/] ");
+        _kebabController.UpdateProductName(productToUpdate, newName);
+    }
+
+    private void UpdateProductDescription(Product productToUpdate)
+    {
+        AnsiConsole.Markup($"[Blue]Current description:[/] {productToUpdate.Description}\n\n");
+        string newDescription = AnsiConsole.Ask<string>("[Yellow]Enter new description:[/] ");
+        _kebabController.UpdateProductDescription(productToUpdate, newDescription);
+    }
+
+    private void UpdateProductPrice(Product productToUpdate)
+    {
+        AnsiConsole.Markup($"[Blue]Current price:[/] {productToUpdate.Price}");
+        decimal newPrice = AnsiConsole.Ask<decimal>("[Yellow]Enter new price:[/] ");
+        _kebabController.UpdateProductPrice(productToUpdate, newPrice);
+    }
     private void DeleteOrder()  // Burayý kodluyorsun
     {
         ViewOrders(_kebabController.GetOrders());

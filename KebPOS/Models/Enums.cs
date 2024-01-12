@@ -38,6 +38,6 @@ internal static class Enums
         Name,
         Description,
         Price,
-        PreviousMenu
+        MainMenu
     }
 }

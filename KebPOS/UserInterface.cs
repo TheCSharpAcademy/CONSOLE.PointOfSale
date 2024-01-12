@@ -132,13 +132,18 @@ public class UserInterface
     {
         var products = _kebabController.GetProducts();
         var productsNameList=products.Select(x => x.Name).ToList();
-        var selectedProductName = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(productsNameList));
+        var selectedProductName = AnsiConsole.Prompt(new SelectionPrompt<string>().
+                                    Title("[Purple]Select product[/]").
+                                    AddChoices(productsNameList));
         Product productToUpdate=products.Single(x=> x.Name==selectedProductName);
-        var propertyToUpdate = AnsiConsole.Prompt(new SelectionPrompt<ProductProperties>().AddChoices(
-                                                                                                    ProductProperties.Name,
-                                                                                                    ProductProperties.Description,
-                                                                                                    ProductProperties.Price,
-                                                                                                    ProductProperties.PreviousMenu));
+        var propertyToUpdate = AnsiConsole.Prompt(new SelectionPrompt<ProductProperties>()
+            .Title("[Purple]Select property to update[/]")            
+            .AddChoices(
+                            ProductProperties.Name,
+                            ProductProperties.Description,
+                            ProductProperties.Price,
+                            ProductProperties.MainMenu));
+
         switch(propertyToUpdate)
         {
             case ProductProperties.Name:
@@ -150,7 +155,7 @@ public class UserInterface
             case ProductProperties.Price:
                 UpdateProductPrice(productToUpdate);
                 break;
-            case ProductProperties.PreviousMenu:
+            case ProductProperties.MainMenu:
                 break;
         }
     }

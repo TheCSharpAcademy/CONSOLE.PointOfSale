@@ -8,17 +8,71 @@ public class ProductService
 {
     internal static void InsertProduct()
     {
-        bool duplicate = false;
-        var product = new Product();
-        product = new Product();
+        bool addNewProduct = true;
+        bool isDuplicate = true;
+        bool nameValid = false;
+        bool priceValid = false;
+        bool descriptionValid = false;
+        int nameLenghtLimit = 20;
+        int descriptionLengthLimit = 200;
+        while (addNewProduct)
+        {
+            var product = new Product();
+            product = new Product();
 
-        product.Name = AnsiConsole.Ask<string>("Product's name (20 char limit):");
+            while (!nameValid && isDuplicate)
+            {
+                Console.Clear();
+                product.Name = AnsiConsole.Ask<string>("Product's name (20 char limit):");
 
-        product.Price = AnsiConsole.Ask<decimal>("Product's price:");
+                nameValid = Validation.CheckStringLength(product.Name, nameLenghtLimit);
+                isDuplicate = Validation.CheckDuplicateProductName(product);
 
-        product.Description = AnsiConsole.Ask<string>("Product's description (200 char limit):");
+                if (!nameValid)
+                {
+                    Console.WriteLine($"The product name {product.Name} is over 20 characters.");
+                }
+                if (isDuplicate)
+                {
+                    Console.WriteLine($"There is already a product named {product.Name}.");
+                }
+                if (!nameValid || isDuplicate)
+                {
+                    Console.WriteLine("Press any key to continue.");
+                    Console.ReadKey();
+                }
 
-        KebabController.AddProduct(product);
+
+            }
+            while (!priceValid)
+            {
+                Console.Clear ();
+                product.Price = AnsiConsole.Ask<decimal>("Product's price:");
+
+                priceValid = Validation.CheckPrice(product.Price);
+                if(!priceValid)
+                { 
+                    Console.WriteLine($"{product.Price} is not valid.");
+                    Console.WriteLine("Press any key to continue.");
+                    Console.ReadKey();
+                }
+
+            }
+            while (!descriptionValid)
+            {
+                Console.Clear();
+                product.Description = AnsiConsole.Ask<string>("Product's description (200 char limit):");
+                descriptionValid = Validation.CheckStringLength(product.Description, descriptionLengthLimit);
+                if (!descriptionValid)
+                {
+                    Console.WriteLine("The product description is over 200 characters");
+                    Console.ReadKey();
+                }
+            }
+            
+            KebabController.AddProduct(product);
+            addNewProduct = AnsiConsole.Confirm("Would you like to enter a new product?");
+        }
     }
 
     public static List<Product> GetProductsFromDatabase()

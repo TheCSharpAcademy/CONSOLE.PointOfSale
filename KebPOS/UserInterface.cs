@@ -74,13 +74,16 @@ public class UserInterface
         switch (selection)
         {
             case ManageProductsSelections.ViewProducts:
-                //add method
+                //added for testing
+                List<Product> products = ProductService.GetProductsFromDatabase();
+                DisplayProducts(products);
+                //added for testing
                 break;
             case ManageProductsSelections.ViewProductDetails:
                 //add method
                 break;
             case ManageProductsSelections.AddProduct:
-                //add method
+                ProductService.InsertProduct();
                 break;
             case ManageProductsSelections.UpdateProduct:
                 //add method
@@ -358,7 +361,37 @@ public class UserInterface
 
         AnsiConsole.Write(productTable);
     }
+// added for testing
+    public void DisplayProducts(List<Product> products)
+    {
+        var productTable = new Table().Centered();
 
+        var blue = "blue";
+        var yellow = "yellow";
+        var red = "red";
+
+        productTable.AddColumns(
+            new TableColumn($"[{blue}]Id[/]"),
+            new TableColumn($"[{blue}]Name[/]"),
+            new TableColumn($"[{blue}]Price[/]")
+        );
+
+        foreach (var product in products)
+        {
+            productTable.AddRow(new List<Markup>
+            {
+                new (product.Id.ToString()),
+                new ($"[{yellow}]{product.Name}[/]"),
+                new ($"[{red}]{product.Price}[/]")
+            });
+
+            productTable.AddEmptyRow();
+            productTable.AddEmptyRow();
+        }
+
+        AnsiConsole.Write(productTable);
+    }
+//end add
     public void DisplayOrders(List<Order> orders)
     {
         var orderTable = new Table().Centered();

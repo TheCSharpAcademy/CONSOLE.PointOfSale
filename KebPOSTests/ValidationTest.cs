@@ -1,4 +1,5 @@
 using KebPOS;
+using KebPOS.Models;
 
 namespace KebPOSTests;
 
@@ -69,5 +70,119 @@ public class ValidationTest
         var result = Validation.IsValidAnswer(input);
 
         Assert.IsFalse(result);
+    }
+
+    [Test]
+    public void CheckStringLength_ValidLength_ReturnsTrue()
+    {
+        //Arrange 
+        string stringToCheck = "SampleProduct";
+        int nameLengthLimit = 15;
+        //Act
+        bool result = Validation.CheckStringLength(stringToCheck, nameLengthLimit);
+        //Assert
+        Assert.IsTrue(result);
+    }
+    [Test]
+    public void CheckStringLength_ValidLength_ReturnsFalse()
+    {
+        //Arrange 
+        string stringToCheck = "SampleProduct";
+        int nameLengthLimit = 12;
+        //Act
+        bool result = Validation.CheckStringLength(stringToCheck, nameLengthLimit);
+        //Assert
+        Assert.IsFalse(result);
+    }
+    [Test]
+    public void CheckDuplicateProductName_ReturnsTrue()
+    {
+        //Arrange 
+        Product product = new Product();
+        product.Name = "Yogurt Kebab";
+
+        //Act
+        bool result = Validation.CheckDuplicateProductName(product);
+
+        //Assert
+        Assert.IsTrue(result);
+    }
+    [Test]
+    public void CheckDuplicateProductName_ReturnsFalse()
+    {
+        //Arrange 
+        Product product = new Product();
+        product.Name = "There should not be a product with this name";
+
+        //Act
+        bool result = Validation.CheckDuplicateProductName(product);
+
+        //Assert
+        Assert.IsFalse(result);
+    }
+
+    [Test]
+    public void CheckValid_ReturnTrue()
+    {
+        //Arrange 
+        decimal price = (decimal)10.01;
+
+        //Act
+        bool result = Validation.CheckValid(price);
+
+        //Assert
+        Assert.IsTrue(result);
+    }
+
+    [Test]
+    public void CheckValid_ReturnFalse()
+    {
+        //Arrange 
+        decimal price = (decimal)10.123;
+
+        //Act
+        bool result = Validation.CheckValid(price);
+
+        //Assert
+        Assert.IsFalse(result);
+
+    }
+
+    [Test]
+    public void CheckPrice_PosPrice_ReturnsTrue()
+    {
+        // Arrange
+        decimal validPrice = (decimal)10.00;
+
+        // Act
+        bool result = Validation.CheckPrice(validPrice);
+
+        // Assert
+        Assert.IsTrue(result);
+    }
+
+    [Test]
+    public void CheckPrice_NegativePrice_ReturnsFalse()
+    {
+        // Arrange
+        decimal invalidPrice = (decimal)-5.00;
+
+        // Act
+        bool result = Validation.CheckPrice(invalidPrice);
+
+        // Assert
+        Assert.IsFalse(result);
+    }
+    [Test]
+    public void CheckPrice_NonNegativePrice_ReturnsTrue()
+    {
+        // Arrange
+        decimal validPrice = (decimal)0.00;
+
+        // Act
+        bool result = Validation.CheckPrice(validPrice);
+
+        // Assert
+        Assert.IsTrue(result);
     }
 }

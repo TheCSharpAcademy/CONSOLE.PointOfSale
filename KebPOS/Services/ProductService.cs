@@ -8,19 +8,23 @@ public class ProductService
 {
     internal static void InsertProduct()
     {
+        bool exit = false;
         bool addNewProduct = true;
-        bool isDuplicate = true;
-        bool nameValid = false;
-        bool priceValid = false;
-        bool descriptionValid = false;
-        int nameLenghtLimit = 20;
-        int descriptionLengthLimit = 200;
+        
         while (addNewProduct)
         {
+            bool isDuplicate = true;
+            bool nameValid = false;
+            bool pricePos = false;
+            bool priceValid = false;
+            bool descriptionValid = false;
+            int nameLenghtLimit = 20;
+            int descriptionLengthLimit = 200;
             var product = new Product();
             product = new Product();
 
-            while (!nameValid && isDuplicate)
+            
+            while (!nameValid || isDuplicate)
             {
                 Console.Clear();
                 product.Name = AnsiConsole.Ask<string>("Product's name (20 char limit):");
@@ -38,40 +42,63 @@ public class ProductService
                 }
                 if (!nameValid || isDuplicate)
                 {
-                    Console.WriteLine("Press any key to continue.");
-                    Console.ReadKey();
+                    Console.WriteLine("Press any key to continue. Or press b to go back");
+                    ConsoleKeyInfo keyInfo = Console.ReadKey();
+                    if (keyInfo.KeyChar.ToString().ToLower() == "b")
+                    {
+                        // Perform some action when 'b' is pressed
+                        exit = true;
+                        nameValid = true;
+                        isDuplicate = false;
+                    }
                 }
-
-
             }
-            while (!priceValid)
+            if (exit)
             {
-                Console.Clear ();
-                product.Price = AnsiConsole.Ask<decimal>("Product's price:");
-
-                priceValid = Validation.CheckPrice(product.Price);
-                if(!priceValid)
-                { 
-                    Console.WriteLine($"{product.Price} is not valid.");
-                    Console.WriteLine("Press any key to continue.");
-                    Console.ReadKey();
-                }
-
+                addNewProduct = false;
             }
-            while (!descriptionValid)
+            else
             {
-                Console.Clear();
-                product.Description = AnsiConsole.Ask<string>("Product's description (200 char limit):");
-                descriptionValid = Validation.CheckStringLength(product.Description, descriptionLengthLimit);
-                if (!descriptionValid)
+
+                while (!pricePos || !priceValid)
                 {
-                    Console.WriteLine("The product description is over 200 characters");
-                    Console.ReadKey();
+                    Console.Clear();
+                    product.Price = AnsiConsole.Ask<decimal>("Product's price:");
+
+                    pricePos = Validation.CheckPrice(product.Price);
+                    priceValid = Validation.CheckValid(product.Price);
+
+
+                    if (!pricePos)
+                    {
+                        Console.WriteLine("Price can not be negative.");
+                    }
+                    if (!priceValid)
+                    {
+                        Console.WriteLine($"{product.Price} is not a valid entry");
+                    }
+                    if (!priceValid || !priceValid)
+                    {
+                        Console.WriteLine("Press any key to continue.");
+                        Console.ReadKey();
+                    }
+
                 }
+                while (!descriptionValid)
+                {
+                    Console.Clear();
+                    product.Description = AnsiConsole.Ask<string>("Product's description (200 char limit):");
+                    descriptionValid = Validation.CheckStringLength(product.Description, descriptionLengthLimit);
+                    if (!descriptionValid)
+                    {
+                        Console.WriteLine("The product description is over 200 characters");
+                        Console.ReadKey();
+                    }
+                }
+
+                KebabController.AddProduct(product);
+                addNewProduct = AnsiConsole.Confirm("Would you like to enter a new product?");
             }
-            
-            KebabController.AddProduct(product);
-            addNewProduct = AnsiConsole.Confirm("Would you like to enter a new product?");
         }
     }
 

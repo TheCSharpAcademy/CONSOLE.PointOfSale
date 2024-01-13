@@ -39,7 +39,7 @@ public class Validation
         bool isDuplicate = true;
         List<Product> dbproducts = ProductService.GetProductsFromDatabase();
 
-        isDuplicate = dbproducts.Any(p => String.Equals(p.Name, product.Name, StringComparison.OrdinalIgnoreCase));
+        isDuplicate = dbproducts.Any(p => String.Equals(p.Name.Trim(), product.Name.Trim(), StringComparison.OrdinalIgnoreCase));
         return isDuplicate;
 
     }
@@ -51,5 +51,12 @@ public class Validation
     {
         bool valid = price >= 0;
         return valid;
+    }
+
+    internal static bool CheckValid(decimal price)
+    {
+        int decimalPlaces = BitConverter.GetBytes(decimal.GetBits(price)[3])[2];
+
+        return decimalPlaces <= 2;
     }
 }

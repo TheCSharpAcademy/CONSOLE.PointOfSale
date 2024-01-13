@@ -36,8 +36,16 @@ public class KebabController
 
     internal static void AddProduct(Product product)
     {
-        using var db = new KebabContext();
-        db.Add(product);
-        db.SaveChanges();
+        try
+        {
+            using var db = new KebabContext();
+            db.Add(product);
+            db.SaveChanges();
+            Console.WriteLine("Product added successfully!");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error adding product to the database: {ex.Message}");
+        }
     }
 }

@@ -26,7 +26,7 @@ public class Validation
             return true;
     }
 
-    internal static bool CheckStringLength(string stringToCheck, int nameLengthLimit)
+    public static bool CheckStringLength(string stringToCheck, int nameLengthLimit)
     {
         bool valid = false;
         if (stringToCheck.Length < nameLengthLimit)
@@ -34,26 +34,25 @@ public class Validation
         return valid;
     }
 
-    internal static bool CheckDuplicateProductName(Product product)
+    public static bool CheckDuplicateProductName(Product product)
     {
         bool isDuplicate = true;
         List<Product> dbproducts = ProductService.GetProductsFromDatabase();
 
         isDuplicate = dbproducts.Any(p => String.Equals(p.Name.Trim(), product.Name.Trim(), StringComparison.OrdinalIgnoreCase));
         return isDuplicate;
-
     }
 
     // User might have a loss leader or sale item you want to ring up for zero
     // but want to track.  ie: water cups
     // -- So I make sure it just can't be negative 
-    internal static bool CheckPrice(decimal price)
+    public static bool CheckPrice(decimal price)
     {
         bool valid = price >= 0;
         return valid;
     }
 
-    internal static bool CheckValid(decimal price)
+    public static bool CheckValid(decimal price)
     {
         int decimalPlaces = BitConverter.GetBytes(decimal.GetBits(price)[3])[2];
 

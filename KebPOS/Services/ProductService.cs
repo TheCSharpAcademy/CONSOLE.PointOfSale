@@ -10,7 +10,7 @@ public class ProductService
     {
         bool exit = false;
         bool addNewProduct = true;
-        
+
         while (addNewProduct)
         {
             bool isDuplicate = true;
@@ -23,7 +23,7 @@ public class ProductService
             var product = new Product();
             product = new Product();
 
-            
+
             while (!nameValid || isDuplicate)
             {
                 Console.Clear();

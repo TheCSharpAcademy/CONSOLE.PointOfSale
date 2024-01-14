@@ -134,20 +134,20 @@ public class UserInterface
     private void UpdateProduct()
     {
         var products = _kebabController.GetProducts();
-        var productsNameList=products.Select(x => x.Name).ToList();
+        var productsNameList = products.Select(x => x.Name).ToList();
         var selectedProductName = AnsiConsole.Prompt(new SelectionPrompt<string>().
                                     Title("[Purple]Select product[/]").
                                     AddChoices(productsNameList));
-        Product productToUpdate=products.Single(x=> x.Name==selectedProductName);
+        Product productToUpdate = products.Single(x => x.Name == selectedProductName);
         var propertyToUpdate = AnsiConsole.Prompt(new SelectionPrompt<ProductProperties>()
-            .Title("[Purple]Select property to update[/]")            
+            .Title("[Purple]Select property to update[/]")
             .AddChoices(
                             ProductProperties.Name,
                             ProductProperties.Description,
                             ProductProperties.Price,
                             ProductProperties.MainMenu));
 
-        switch(propertyToUpdate)
+        switch (propertyToUpdate)
         {
             case ProductProperties.Name:
                 UpdateProductName(productToUpdate);
@@ -179,8 +179,19 @@ public class UserInterface
 
     private void UpdateProductPrice(Product productToUpdate)
     {
-        AnsiConsole.Markup($"[Blue]Current price:[/] {productToUpdate.Price}");
-        decimal newPrice = AnsiConsole.Ask<decimal>("[Yellow]Enter new price:[/] ");
+        AnsiConsole.Markup($"[Blue]Current price:[/] {productToUpdate.Price}\n");
+        decimal newPrice = AnsiConsole.Prompt(
+                                              new TextPrompt<decimal>("[Yellow]Enter new price:[/] ")
+                                              .ValidationErrorMessage("Not valid input")
+                                              .Validate(price =>
+                                              {
+                                                  return price switch
+                                                  {
+                                                      <= 0 => ValidationResult.Error("Price must be greater than zero"),
+                                                      _ => ValidationResult.Success(),
+                                                  };
+                                              }));
+
         _kebabController.UpdateProductPrice(productToUpdate, newPrice);
     }
     private void DeleteOrder()  // Burayý kodluyorsun
@@ -413,7 +424,7 @@ public class UserInterface
 
         AnsiConsole.Write(productTable);
     }
-// added for testing
+    // added for testing
     public void DisplayProducts(List<Product> products)
     {
         var productTable = new Table().Centered();
@@ -443,7 +454,7 @@ public class UserInterface
 
         AnsiConsole.Write(productTable);
     }
-//end add
+    //end add
     public void DisplayOrders(List<Order> orders)
     {
         var orderTable = new Table().Centered();

@@ -8,7 +8,7 @@ public class KebabController
 {
     public void UpdateProductName(Product product, string newProductName)
     {
-         using var db = new KebabContext();
+        using var db = new KebabContext();
         product.Name = newProductName;
         db.Entry(product).State = EntityState.Modified;
         db.SaveChanges();

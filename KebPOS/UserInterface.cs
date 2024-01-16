@@ -89,7 +89,7 @@ public class UserInterface
                 UpdateProduct();
                 break;
             case ManageProductsSelections.DeleteProduct:
-                //add method
+                DeleteProduct();
                 break;
             case ManageProductsSelections.ReturnToMainMenu:
                 InitializeMenu();
@@ -183,6 +183,29 @@ public class UserInterface
         decimal newPrice = AnsiConsole.Ask<decimal>("[Yellow]Enter new price:[/] ");
         _kebabController.UpdateProductPrice(productToUpdate, newPrice);
     }
+
+    private void DeleteProduct()
+    {
+        var products = _kebabController.GetProducts();
+
+        if (products.Count > 0)
+        {
+            Product productToDelete = AnsiConsole.Prompt(
+                 new SelectionPrompt<Product>()
+                .Title("Select a Product to delete:")
+                .AddChoices(products));
+
+            _kebabController.RemoveProduct(productToDelete);
+            Console.WriteLine("Product removed succesfully!");
+        }
+        else
+        {
+            Console.WriteLine("There are no products!");
+        }
+
+        Console.ReadLine();
+    }
+
     private void DeleteOrder()  // Burayý kodluyorsun
     {
         ViewOrders(_kebabController.GetOrders());

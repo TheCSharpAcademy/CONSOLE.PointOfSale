@@ -71,4 +71,14 @@ public class KebabController
             Console.WriteLine($"Error adding product to the database: {ex.Message}");
         }
     }
+
+    internal void RemoveProduct(Product product)
+    {
+        using var db = new KebabContext();
+
+        product.isActive = false;
+
+        db.Update(product);
+        db.SaveChanges();
+    }
 }

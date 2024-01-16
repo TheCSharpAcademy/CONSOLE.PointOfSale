@@ -18,5 +18,7 @@ public class Product
     [Precision(18, 2)]
     public decimal Price { get; set; }
 
+    public bool isActive { get; set; }
+
     public ICollection<OrderProduct> OrderProducts { get; set; }
 }
